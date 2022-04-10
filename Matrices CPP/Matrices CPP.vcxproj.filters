@@ -24,12 +24,18 @@
     <ClCompile Include="CMatrices.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="CException.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CFichier.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="CMatrices.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="CException.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>

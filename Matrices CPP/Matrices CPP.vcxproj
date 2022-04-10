@@ -141,11 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CException.cpp" />
     <ClCompile Include="CFichier.cpp" />
     <ClCompile Include="mainMatrices.cpp" />
     <ClCompile Include="CMatrices.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CException.h" />
     <ClInclude Include="CFichier.h" />
     <ClInclude Include="CMatrices.h" />
   </ItemGroup>

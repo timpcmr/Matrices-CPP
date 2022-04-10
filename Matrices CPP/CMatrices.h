@@ -10,7 +10,7 @@ public:
 	//Constructeurs et destructeurs
 	CMatrices<MType>();
 	CMatrices<MType>(unsigned int uiParam1, unsigned int uiParam2);
-	CMatrices<MType>(CMatrices<MType> MATparam);
+	CMatrices<MType>(CMatrices<MType> &MATparam);
 	~CMatrices<MType>();
 
 	//Accesseurs
