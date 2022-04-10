@@ -31,17 +31,17 @@ CMatrices<MType>::CMatrices(unsigned int uiParam1, unsigned int uiParam2)
 {
 	unsigned int uiboucle1, uiboucle2;
 
-	uiNbLignes = uiParam1;
-	uiNbColonnes = uiParam2;
+	uiMATNbLignes = uiParam1;
+	uiMATNbColonnes = uiParam2;
 
 	//Création de la matrice avec n lignes
-	pMTPContenu = new MType * [uiNbLignes];
+	pMTPMATContenu = new MType * [uiMATNbLignes];
 
 	//Ajout de uiNbColonnes cases dans chaque ligne et affectation à la valeur par défaut
-	for (uiboucle1 = 0; uiboucle1 < uiNbLignes; uiboucle1++) {
-		pMTPContenu[uiboucle1] = new MType[uiNbColonnes];
-		for (uiboucle2 = 0; uiboucle2 < uiNbColonnes; uiboucle2++) {
-			pMTPContenu[uiboucle1][uiboucle2] = MType();
+	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
+		pMTPMATContenu[uiboucle1] = new MType[uiMATNbColonnes];
+		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; uiboucle2++) {
+			pMTPMATContenu[uiboucle1][uiboucle2] = MType();
 		}
 	}
 }
@@ -56,16 +56,27 @@ template<class MType>
 CMatrices<MType>::CMatrices(CMatrices<MType> &MATparam)
 {
 	unsigned int uiboucle1, uiboucle2;
-	uiNbColonnes = MATparam.MATLireNbColonnes();
-	uiNbLignes = MATparam.MATLireNbLignes();
+	uiMATNbColonnes = MATparam.MATLireNbColonnes();
+	uiMATNbLignes = MATparam.MATLireNbLignes();
 
-	pMTPContenu = new MType * [uiNbLignes];
+	pMTPMATContenu = new MType * [uiMATNbLignes];
 
 
-	for (uiboucle1 = 0; uiboucle1 < uiNbLignes; uiboucle1++) {
-		pMTPContenu[uiboucle1] = new MType[uiNbColonnes];
-		for (uiboucle2 = 0; uiboucle2 < uiNbColonnes; iboucle2++) {
-			pMTPContenu[uiboucle1][uiboucle2] = MATparam.MATLireElement(uiboucle1, uiboucle2);
+	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
+		pMTPMATContenu[uiboucle1] = new MType[uiMATNbColonnes];
+		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; iboucle2++) {
+			pMTPMATContenu[uiboucle1][uiboucle2] = MATparam.MATLireElement(uiboucle1, uiboucle2);
 		}
 	}
+}
+
+template<class MType>
+CMatrices<MType>::~CMatrices()
+{
+	unsigned int uiBoucle;
+	for (uiBoucle = 0; uiBoucle < uiMATNbLignes; uiBoucle++) {
+		delete[] pMTPMATContenu[uiNbLignes];
+	}
+
+	delete[] pMTPMATContenu
 }

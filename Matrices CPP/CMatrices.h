@@ -2,9 +2,9 @@
 template<class MType> class CMatrices {
 private:
 	//Atributs
-	unsigned int uiNbLignes;
-	unsigned int uiNbColonnes;
-	MType** pMTPContenu;
+	unsigned int uiMATNbLignes;
+	unsigned int uiMATNbColonnes;
+	MType** pMTPMATContenu;
 
 public:
 	//Constructeurs et destructeurs
