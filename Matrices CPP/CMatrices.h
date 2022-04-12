@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 template<class MType> class CMatrices {
 private:
 	//Atributs

@@ -103,8 +103,16 @@ MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColo
 template<class MType>
 MType CMatrices<MType>::MATAfficherMatrice()
 {
-	return 0; //TODO
+	unsigned int uiboucle1, uiboucle2;
+	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
+		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; uiboucle2++) {
+			std::cout << pMTPMATContenu[uiboucle1][uiboucle2];
+		}
+		std::cout << "\n";
+	}
 }
+
+
 
 template<class MType>
 void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MATParam)
