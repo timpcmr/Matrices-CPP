@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAT
+#define MAT
 #include <iostream>
 template<class MType> class CMatrices {
 private:
@@ -31,7 +32,10 @@ public:
 	CMatrices<MType> operator*(CMatrices<MType> MATmult)const;
 	CMatrices<MType> operator=(CMatrices<MType> MATegal)const;
 
+	//Méthodes Universelles (ne dépendent pas du type)
+	CMatrices<MType> MATTransposer(CMatrices<MType> MATMatrice);
 
 };
 
 
+#endif

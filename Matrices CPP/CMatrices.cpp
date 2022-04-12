@@ -121,3 +121,18 @@ void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColo
 }
 
 
+
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::MATTransposer(CMatrices<MType> MATMatrice)
+{
+	CMatrices<MType> retour(MATMatrice.MATLireNbColonnes(), MATMatrice.MATLireNbLignes());
+	unsigned int uiBoucle1, uiBoucle2;
+	for (uiBoucle1 = 0; uiBoucle1 < retour.MATLireNbLignes(); uiBoucle1++) {
+		for (uiBoucle2 = 0; uiBoucle2 < retour.MATLireNbColonnes(); uiBoucle2++) {
+			retour.MATModifierCase(uiBoucle1, uiBoucle2, MATMatrice.MATLireElement(uiBoucle2, uiBoucle1));
+		}
+	}
+
+
+	return retour;
+}

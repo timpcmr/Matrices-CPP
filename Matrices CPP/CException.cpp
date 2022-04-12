@@ -1,5 +1,16 @@
 #include "CException.h"
 
+CException::CException()
+{
+	iEXCValeur = 0;
+}
+
+CException::CException(int iVal)
+{
+	iEXCValeur = iVal;
+}
+
+
 /***************************************************************************
 **** Entrées :                                  	                    ****
 **** Nécessite :                                                        ****

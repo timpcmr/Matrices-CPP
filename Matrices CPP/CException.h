@@ -2,17 +2,17 @@
 #ifndef EXCEPTION
 #define EXCEPTION
 
-#define FichierIntrouvable 1
-#define DivZero 2
-#define SegFault 3
-#define Doublon 4
+#define ExcNonSpecifiee 0
 
 
 class CException
 {
-	private:
-		int iEXCValeur;
+private:
+	int iEXCValeur;
 public:
+	CException();
+	CException(int iVal);
+
 	int EXCLireErreur(void);
 	void EXCSetValue(int iparam);
 
