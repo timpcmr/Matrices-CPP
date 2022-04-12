@@ -21,6 +21,7 @@ public:
 	CMatrices<double> FICLireMatrice(char* pcChemin);
 	//Fonctions de handle mauvaise mise en forme
 	char * FICMinuscule(char* pcChaine);
+	void FICSupp_Tab_Espace(char* pcChaine);
 };
 
 #endif

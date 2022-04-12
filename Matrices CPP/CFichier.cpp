@@ -46,3 +46,31 @@ char * Cfichier::FICMinuscule(char* pcChaine)
 	}
 	return pcChaine;
 }
+
+void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
+{
+	unsigned int uiboucle1, uiboucle2;
+
+	//On supprime soit les tabulations soit les espaces sinon lors du parsage des valeurs de matrices on aura une corruption de données.
+	//Dans le cas des valeurs de matrices on a juste une tabulation au debut. On la supprime pour améliorer le traitement par les flots.
+	if (pcChaine[0] == '\t') {
+		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
+			if (pcChaine[uiboucle1] == '\t') {
+				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
+					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
+				}
+			}
+		}
+	}
+	//Traitement des espaces dans le cas ou une tabulation n'est pas en début de ligne.
+	if (pcChaine[0] == ' ') {
+		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
+			if (pcChaine[uiboucle1] == ' ') {
+				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
+					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
+				}
+			}
+		}
+	}
+	pcChaine[uiboucle1] = '\0';
+}
