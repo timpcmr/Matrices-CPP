@@ -9,14 +9,14 @@
 template<class MType>
 inline CMatrices<MType>::CMatrices()
 {
-	uiNbLignes = 1;
-	uiNbColonnes = 1;
+	uiMATNbLignes = 1;
+	uiMATNbColonnes = 1;
 	//Initialisation de la matrice
-	pMTPContenu = new MType * [uiNbLignes];
-	pMTPContenu[0] = new MType[uiNbColonnes];
+	pMTPMATContenu = new MType * [uiMATNbLignes];
+	pMTPMATContenu[0] = new MType[uiMATNbColonnes];
 
 	//On affecte une valeur par défaut selon le type à la seule case de cette matrice 1x1
-	**pMTPContenu= MType();
+	**pMTPMATContenu= MType();
 }
 
 
@@ -64,7 +64,7 @@ CMatrices<MType>::CMatrices(CMatrices<MType> &MATparam)
 
 	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
 		pMTPMATContenu[uiboucle1] = new MType[uiMATNbColonnes];
-		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; iboucle2++) {
+		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; uiboucle2++) {
 			pMTPMATContenu[uiboucle1][uiboucle2] = MATparam.MATLireElement(uiboucle1, uiboucle2);
 		}
 	}
@@ -75,8 +75,8 @@ CMatrices<MType>::~CMatrices()
 {
 	unsigned int uiBoucle;
 	for (uiBoucle = 0; uiBoucle < uiMATNbLignes; uiBoucle++) {
-		delete[] pMTPMATContenu[uiNbLignes];
+		delete[] pMTPMATContenu[uiMATNbLignes];
 	}
 
-	delete[] pMTPMATContenu
+	delete[] pMTPMATContenu;
 }
