@@ -15,6 +15,10 @@
 #define CheminNul 1
 #define FichierNonOuvert 2
 #define ErrTypeMat 3
+#define DimLigneNeg 4
+#define DimColonneNeg 5
+#define ParserPointeurNul 6
+
 
 class Cfichier {
 public:

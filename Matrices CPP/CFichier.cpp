@@ -3,7 +3,7 @@
 using namespace std;
 
 
-
+/*
 
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
@@ -12,15 +12,50 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	}
 	ifstream fichier(pcChemin);
 	//Exceptions à rajouter
-	CMatrices<double> MATretour;
+	unsigned int uiparsedLignes, uiparsedColonnes;
+
 	char* pcLigne = new char[STR_LENGTH];
-	char* pcToken = new char[STR_LENGTH];
+	char pcToken[STR_LENGTH];
 
 	if (fichier.is_open()) {
+
+		//On récupère le type de données
 		fichier.getline(pcLigne, STR_LENGTH);
 		pcToken = strtok(pcLigne, '=');
 		pcToken = strtok(NULL, '=');
+		if (pcToken == nullptr) {
+			throw CException(ParserPointeurNul);
+		}
 		if (strcmp(FICMinuscule(pcToken), "double") == 0){
+
+			//On récupère le nombre de lignes
+			fichier.getline(pcLigne, STR_LENGTH);
+			pcToken = strtok(pcLigne, '=');
+			pcToken = strtok(NULL, '=');
+			if (pcToken == nullptr) {
+				throw CException(ParserPointeurNul);
+			}
+			else if (atoi(pcToken) < 0) {
+				throw CException(DimLigneNeg);
+			}
+			uiparsedLignes = (unsigned int)(atoi(pcToken));
+
+			//On récupère le nombre de colonnes
+			fichier.getline(pcLigne, STR_LENGTH);
+			pcToken = strtok(pcLigne, '=');
+			pcToken = strtok(NULL, '=');
+			if (pcToken == nullptr) {
+				throw CException(ParserPointeurNul);
+			}
+			else if (atoi(pcToken) < 0) {
+				throw CException(DimColonneNeg);
+			}
+			uiparsedColonnes = (unsigned int)(atoi(pcToken));
+
+			//Instanciation de la matrice de retour aux bonnes dimensions
+			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
+			//fetch values to do
+
 
 		}
 		else {
@@ -36,6 +71,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	
 
 }
+*/
 
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
