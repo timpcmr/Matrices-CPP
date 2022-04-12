@@ -80,3 +80,36 @@ CMatrices<MType>::~CMatrices()
 
 	delete[] pMTPMATContenu;
 }
+
+
+template<class MType>
+inline unsigned int CMatrices<MType>::MATLireNbLignes()
+{
+	return uiMATNbLignes;
+}
+
+template<class MType>
+inline unsigned int CMatrices<MType>::MATLireNbColonnes()
+{
+	return uiMATNbColonnes;
+}
+
+template<class MType>
+MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColonne)
+{
+	return pMTPMATContenu[uiLigne][uiColonne];
+}
+
+template<class MType>
+MType CMatrices<MType>::MATAfficherMatrice()
+{
+	return 0; //TODO
+}
+
+template<class MType>
+void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MATParam)
+{
+	this[uiLigne][uiColonne] = MATParam;
+}
+
+
