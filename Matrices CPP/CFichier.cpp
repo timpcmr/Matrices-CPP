@@ -15,14 +15,14 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	unsigned int uiparsedLignes, uiparsedColonnes, uiboucle1, uiboucle2;
 
 	char* pcLigne = new char[STR_LENGTH];
-	char pcToken[STR_LENGTH];
+	char* pcToken = new char[STR_LENGTH];
 
 	if (fichier.is_open()) {
 
 		//On récupère le type de données
 		fichier.getline(pcLigne, STR_LENGTH);
-		pcToken = strtok(pcLigne, '=');
-		pcToken = strtok(NULL, '=');
+		pcToken = strtok(pcLigne, "=");
+		pcToken = strtok(NULL, "=");
 		if (pcToken == nullptr) {
 			throw CException(EXCParserPointeurNul);
 		}
@@ -30,8 +30,8 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 
 			//On récupère le nombre de lignes
 			fichier.getline(pcLigne, STR_LENGTH);
-			pcToken = strtok(pcLigne, '=');
-			pcToken = strtok(NULL, '=');
+			pcToken = strtok(pcLigne, "=");
+			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
 				throw CException(EXCParserPointeurNul);
 			}
@@ -42,8 +42,8 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 
 			//On récupère le nombre de colonnes
 			fichier.getline(pcLigne, STR_LENGTH);
-			pcToken = strtok(pcLigne, '=');
-			pcToken = strtok(NULL, '=');
+			pcToken = strtok(pcLigne, "=");
+			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
 				throw CException(EXCParserPointeurNul);
 			}
@@ -63,10 +63,14 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
-				pcToken = strtok(pcLigne, STR_LENGTH);
+				pcToken = strtok(pcLigne, " ");
+				MATretour.MATModifierCase(uiboucle1, 0, atof(pcToken));
+				for (uiboucle2 = 1; uiboucle2 < uiparsedColonnes; uiboucle2++) {
+					pcToken = strtok(NULL, " ");
+					MATretour.MATModifierCase(uiboucle1, uiboucle2, atof(pcToken));
+				}
 			}
-
-
+			return MATretour;
 		}
 		else {
 			throw CException(EXCErrTypeMat);
@@ -75,9 +79,10 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	else {
 		throw CException(EXCFichierNonOuvert);
 	}
+	//Cas impossible mais nécéssaire à la compilation
 
-
-	return MATretour;
+	CMatrices<double> MATRetour(1,1);
+	return MATRetour;
 	
 
 }
@@ -101,7 +106,7 @@ void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 	if (pcChaine == nullptr) {
 		throw CException(EXCCheminNul);
 	}
-	unsigned int uiboucle1, uiboucle2;
+	unsigned int uiboucle1 = 0, uiboucle2;
 
 	//On supprime soit les tabulations soit les espaces sinon lors du parsage des valeurs de matrices on aura une corruption de données.
 	//Dans le cas des valeurs de matrices on a juste une tabulation au debut. On la supprime pour améliorer le traitement par les flots.

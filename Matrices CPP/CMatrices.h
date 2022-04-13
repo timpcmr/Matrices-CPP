@@ -1,6 +1,7 @@
 #ifndef MAT
 #define MAT
 #include <iostream>
+#include <cstdio>
 template<class MType> class CMatrices {
 private:
 	//Atributs

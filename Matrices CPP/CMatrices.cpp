@@ -1,5 +1,7 @@
 #include "CMatrices.h"
 
+using namespace std;
+
 /***********************************************************************************
 **** Entrées :                         											****
 **** Nécessite :																****
@@ -104,11 +106,18 @@ template<class MType>
 MType CMatrices<MType>::MATAfficherMatrice()
 {
 	unsigned int uiboucle1, uiboucle2;
+	if (MATLireNbLignes() > 0 && MATLireNbColonnes() > 0) {
+		cout << "Type des éléments : " << typeid(MATLireElement(0, 0)) << endl;
+	}
+
+	cout << "Nombre de lignes : " << MATLireNbLignes() << endl;
+	cout << "Nombre de Colonnes : " << MATLireNbColonnes() << endl;
+
 	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
 		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; uiboucle2++) {
-			std::cout << pMTPMATContenu[uiboucle1][uiboucle2];
+			cout << pMTPMATContenu[uiboucle1][uiboucle2];
 		}
-		std::cout << "\n";
+		cout << endl;
 	}
 }
 
