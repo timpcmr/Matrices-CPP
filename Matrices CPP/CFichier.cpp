@@ -3,16 +3,16 @@
 using namespace std;
 
 
-/*
+
 
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
 	if (pcChemin == nullptr) {
-		throw CException(CheminNul);
+		throw CException(EXCCheminNul);
 	}
 	ifstream fichier(pcChemin);
 	//Exceptions à rajouter
-	unsigned int uiparsedLignes, uiparsedColonnes;
+	unsigned int uiparsedLignes, uiparsedColonnes, uiboucle1, uiboucle2;
 
 	char* pcLigne = new char[STR_LENGTH];
 	char pcToken[STR_LENGTH];
@@ -24,7 +24,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 		pcToken = strtok(pcLigne, '=');
 		pcToken = strtok(NULL, '=');
 		if (pcToken == nullptr) {
-			throw CException(ParserPointeurNul);
+			throw CException(EXCParserPointeurNul);
 		}
 		if (strcmp(FICMinuscule(pcToken), "double") == 0){
 
@@ -33,10 +33,10 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			pcToken = strtok(pcLigne, '=');
 			pcToken = strtok(NULL, '=');
 			if (pcToken == nullptr) {
-				throw CException(ParserPointeurNul);
+				throw CException(EXCParserPointeurNul);
 			}
 			else if (atoi(pcToken) < 0) {
-				throw CException(DimLigneNeg);
+				throw CException(EXCDimLigneNeg);
 			}
 			uiparsedLignes = (unsigned int)(atoi(pcToken));
 
@@ -45,25 +45,35 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			pcToken = strtok(pcLigne, '=');
 			pcToken = strtok(NULL, '=');
 			if (pcToken == nullptr) {
-				throw CException(ParserPointeurNul);
+				throw CException(EXCParserPointeurNul);
 			}
 			else if (atoi(pcToken) < 0) {
-				throw CException(DimColonneNeg);
+				throw CException(EXCDimColonneNeg);
 			}
 			uiparsedColonnes = (unsigned int)(atoi(pcToken));
 
 			//Instanciation de la matrice de retour aux bonnes dimensions
 			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
-			//fetch values to do
+			
+
+			//On saute la ligne Matrice=[
+			fichier.getline(pcLigne, STR_LENGTH);
+
+			//Et on commence à récupérer les valeurs
+			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
+				fichier.getline(pcLigne, STR_LENGTH);
+				FICSupp_Tab_Espace(pcLigne);
+				pcToken = strtok(pcLigne, STR_LENGTH);
+			}
 
 
 		}
 		else {
-			throw CException(ErrTypeMat);
+			throw CException(EXCErrTypeMat);
 		}
 	}
 	else {
-		throw CException(FichierNonOuvert);
+		throw CException(EXCFichierNonOuvert);
 	}
 
 
@@ -71,10 +81,13 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	
 
 }
-*/
+
 
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
+	if (pcChaine == nullptr) {
+		throw CException(EXCCheminNul);
+	}
 	unsigned int uiboucle;
 
 	for (uiboucle = 0; pcChaine[uiboucle] != '\0'; uiboucle++) {
@@ -85,6 +98,9 @@ char * Cfichier::FICMinuscule(char* pcChaine)
 
 void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 {
+	if (pcChaine == nullptr) {
+		throw CException(EXCCheminNul);
+	}
 	unsigned int uiboucle1, uiboucle2;
 
 	//On supprime soit les tabulations soit les espaces sinon lors du parsage des valeurs de matrices on aura une corruption de données.

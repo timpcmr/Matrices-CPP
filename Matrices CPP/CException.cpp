@@ -2,7 +2,7 @@
 
 CException::CException()
 {
-	iEXCValeur = 0;
+	iEXCValeur = EXCNonSpecifiee;
 }
 
 CException::CException(int iVal)

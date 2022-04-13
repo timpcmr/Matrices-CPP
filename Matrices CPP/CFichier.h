@@ -12,12 +12,12 @@
 
 #define STR_LENGTH 256
 
-#define CheminNul 1
-#define FichierNonOuvert 2
-#define ErrTypeMat 3
-#define DimLigneNeg 4
-#define DimColonneNeg 5
-#define ParserPointeurNul 6
+#define EXCCheminNul 1
+#define EXCFichierNonOuvert 2
+#define EXCErrTypeMat 3
+#define EXCDimLigneNeg 4
+#define EXCDimColonneNeg 5
+#define EXCParserPointeurNul 6
 
 
 class Cfichier {

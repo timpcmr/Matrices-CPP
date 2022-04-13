@@ -2,7 +2,7 @@
 #ifndef EXCEPTION
 #define EXCEPTION
 
-#define ExcNonSpecifiee 0
+#define EXCNonSpecifiee 0
 
 
 class CException
