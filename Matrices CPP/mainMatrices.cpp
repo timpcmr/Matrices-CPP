@@ -8,6 +8,10 @@
 #include "CException.h"
 #include "CMatrices.h"
 
+
+#define _CRT_SECURE_NO_WARNINGS
+
+
 int main()
 {
     std::cout << "Hello World!\n";

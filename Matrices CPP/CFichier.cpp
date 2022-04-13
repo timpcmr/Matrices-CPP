@@ -3,7 +3,7 @@
 using namespace std;
 
 
-
+/*
 
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
@@ -53,8 +53,8 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			uiparsedColonnes = (unsigned int)(atoi(pcToken));
 
 			//Instanciation de la matrice de retour aux bonnes dimensions
+			//CMatrices<double> MATretour = CMatrices<double>(uiparsedLignes, uiparsedColonnes);
 			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
-			
 
 			//On saute la ligne Matrice=[
 			fichier.getline(pcLigne, STR_LENGTH);
@@ -81,12 +81,12 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	}
 	//Cas impossible mais nécéssaire à la compilation
 
-	CMatrices<double> MATRetour(1,1);
+	CMatrices<double> MATRetour;
 	return MATRetour;
 	
 
 }
-
+*/
 
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
