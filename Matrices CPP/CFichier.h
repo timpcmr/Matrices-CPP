@@ -22,10 +22,10 @@
 
 class Cfichier {
 public:
-	CMatrices<double> FICLireMatrice(char* pcChemin);
+	static CMatrices<double> FICLireMatrice(char* pcChemin);
 	//Fonctions de handle mauvaise mise en forme
-	char * FICMinuscule(char* pcChaine);
-	void FICSupp_Tab_Espace(char* pcChaine);
+	static char * FICMinuscule(char* pcChaine);
+	static void FICSupp_Tab_Espace(char* pcChaine);
 };
 
 #endif

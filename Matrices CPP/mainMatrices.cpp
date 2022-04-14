@@ -7,13 +7,19 @@
 #include "CFichier.h"
 #include "CException.h"
 #include "CMatrices.h"
+#include "COperations.h"
 
 
-#define _CRT_SECURE_NO_WARNINGS
 
 
 int main()
 {
+    char test[] = "M1.txt";
+    /*CMatrices<double> mattest;
+    mattest = Cfichier::FICLireMatrice(test);
+    mattest.MATAfficherMatrice();*/
+    Cfichier::FICLireMatrice(test);
+
     std::cout << "Hello World!\n";
 }
 

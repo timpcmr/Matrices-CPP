@@ -1,9 +1,10 @@
 #include "CFichier.h"
+#pragma warning(disable : 4996)
 
 using namespace std;
 
 
-/*
+
 
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
@@ -70,6 +71,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 					MATretour.MATModifierCase(uiboucle1, uiboucle2, atof(pcToken));
 				}
 			}
+			MATretour.MATAfficherMatrice();
 			return MATretour;
 		}
 		else {
@@ -86,7 +88,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	
 
 }
-*/
+
 
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
