@@ -83,8 +83,8 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	}
 	//Cas impossible mais nécéssaire à la compilation
 
-	CMatrices<double> MATRetour;
-	return MATRetour;
+	CMatrices<double> MATretour;
+	return MATretour;
 	
 
 }

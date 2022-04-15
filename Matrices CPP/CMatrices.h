@@ -116,7 +116,7 @@ CMatrices<MType>::~CMatrices()
 {
 	unsigned int uiBoucle;
 	for (uiBoucle = 0; uiBoucle < uiMATNbLignes; uiBoucle++) {
-		delete[] pMTPMATContenu[uiMATNbLignes];
+		delete[] pMTPMATContenu[uiBoucle];
 	}
 
 	delete[] pMTPMATContenu;

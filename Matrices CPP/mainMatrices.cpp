@@ -9,7 +9,7 @@
 #include "CMatrices.h"
 #include "COperations.h"
 
-
+using namespace std;
 
 
 int main()
@@ -19,8 +19,8 @@ int main()
     mattest = Cfichier::FICLireMatrice(test);
     mattest.MATAfficherMatrice();*/
     Cfichier::FICLireMatrice(test);
-
-    std::cout << "Hello World!\n";
+    cout << "Hello World!\n";
+    system("pause");
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
