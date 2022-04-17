@@ -1,0 +1,14 @@
+
+TypeMat]rice =do    uble
+Nombre Lignes= 3
+NombreColonnes =3
+
+
+
+Matrice=[
+1                 48 2
+            12 3.7 
+6
+
+-8 1 0
+]

@@ -31,10 +31,14 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 		if (pcToken == nullptr) {
 			throw CException(EXCParserPointeurNul);
 		}
-		if (tolower(pcToken[0]) == 'd') {
+		if (strcmp(FICMinuscule(pcToken), "double") == 0) {
 
 			//On récupère le nombre de lignes
-			fichier.getline(pcLigne, STR_LENGTH);
+			do
+			{
+				fichier.getline(pcLigne, STR_LENGTH);
+				FICSupp_Tab_Espace(pcLigne);
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
@@ -46,7 +50,11 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			uiparsedLignes = (unsigned int)(atoi(pcToken));
 
 			//On récupère le nombre de colonnes
-			fichier.getline(pcLigne, STR_LENGTH);
+			do
+			{
+				fichier.getline(pcLigne, STR_LENGTH);
+				FICSupp_Tab_Espace(pcLigne);
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
@@ -62,12 +70,30 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
 
 			//On saute la ligne Matrice=[
-			fichier.getline(pcLigne, STR_LENGTH);
-
-			//Et on commence à récupérer les valeurs
-			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
+			do
+			{
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+
+			//Et on commence à récupérer les valeurs
+			
+
+			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
+				//On cherche la première ligne de valeurs non nulle
+
+				do {
+					fichier.getline(pcLigne, STR_LENGTH);
+				} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+				
+				//On teste si il y a un tab en début de ligne et dans la ligne, sinon, on ne supprimme pas les espaces entre les valeurs
+				
+				if (pcLigne[0] == '\t') {
+					FICSupp_Tab_Espace(pcLigne);
+				}
+				
+				//while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+				
 				pcToken = strtok(pcLigne, " ");
 				MATretour.MATModifierCase(uiboucle1, 0, atof(pcToken));
 				for (uiboucle2 = 1; uiboucle2 < uiparsedColonnes; uiboucle2++) {
@@ -97,7 +123,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
 	if (pcChaine == nullptr) {
-		throw CException(EXCCheminNul);
+		throw CException(EXCTokenNulMinuscule);
 	}
 	unsigned int uiboucle;
 
@@ -110,7 +136,7 @@ char * Cfichier::FICMinuscule(char* pcChaine)
 void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 {
 	if (pcChaine == nullptr) {
-		throw CException(EXCCheminNul);
+		throw CException(EXCTokenNulSuppEspace);
 	}
 	unsigned int uiboucle1 = 0, uiboucle2;
 

@@ -18,6 +18,8 @@
 #define EXCDimLigneNeg 4
 #define EXCDimColonneNeg 5
 #define EXCParserPointeurNul 6
+#define EXCTokenNulMinuscule 7
+#define EXCTokenNulSuppEspace 8
 
 
 class Cfichier {
