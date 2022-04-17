@@ -31,6 +31,9 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 		if (pcToken == nullptr) {
 			throw CException(EXCParserPointeurNul);
 		}
+		//Traitement d'éventuels espaces dans le type de fichiers
+		//FICSupp_Tab_Espace(pcToken);
+
 		if (strcmp(FICMinuscule(pcToken), "double") == 0) {
 
 			//On récupère le nombre de lignes
@@ -66,7 +69,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			uiparsedColonnes = (unsigned int)(atoi(pcToken));
 
 			//Instanciation de la matrice de retour aux bonnes dimensions
-			//CMatrices<double> MATretour = CMatrices<double>(uiparsedLignes, uiparsedColonnes);
+
 			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
 
 			//On saute la ligne Matrice=[
@@ -80,27 +83,48 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			
 
 			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
-				//On cherche la première ligne de valeurs non nulle
+				//On cherche la première/suivante ligne de valeurs non nulle
 
 				do {
 					fichier.getline(pcLigne, STR_LENGTH);
 				} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
 				
-				//On teste si il y a un tab en début de ligne et dans la ligne, sinon, on ne supprimme pas les espaces entre les valeurs
+				//On teste si il y a un tab en début de ligne, si oui on le supprime et ceux 
+				//dans la ligne, sinon, on ne supprimme pas les espaces entre les valeurs
 				
 				if (pcLigne[0] == '\t') {
 					FICSupp_Tab_Espace(pcLigne);
 				}
-				
-				//while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
-				
+								
 				pcToken = strtok(pcLigne, " ");
+				if (pcToken[0] == ']') {
+					throw CException(EXCLigneDimSup);
+				}
 				MATretour.MATModifierCase(uiboucle1, 0, atof(pcToken));
 				for (uiboucle2 = 1; uiboucle2 < uiparsedColonnes; uiboucle2++) {
 					pcToken = strtok(NULL, " ");
+					if (pcToken == nullptr) {
+						throw CException(EXCColonneDimSup);
+					}
 					MATretour.MATModifierCase(uiboucle1, uiboucle2, atof(pcToken));
 				}
+				pcToken = strtok(NULL, " ");
+				if (pcToken != nullptr) {
+					throw CException(EXCColonneDimInf);
+				}
+
 			}
+
+			do
+			{
+				fichier.getline(pcLigne, STR_LENGTH);
+				FICSupp_Tab_Espace(pcLigne);
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+
+			if (pcLigne[0] != ']') {
+				throw CException(EXCLigneDimInf);
+			}
+
 			MATretour.MATAfficherMatrice();
 			return MATretour;
 		}
@@ -158,6 +182,7 @@ void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
 					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
 				}
+				uiboucle1--;
 			}
 		}
 	}

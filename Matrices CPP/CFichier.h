@@ -20,10 +20,15 @@
 #define EXCParserPointeurNul 6
 #define EXCTokenNulMinuscule 7
 #define EXCTokenNulSuppEspace 8
+#define EXCColonneDimSup 9
+#define EXCColonneDimInf 10
+#define EXCLigneDimSup 11
+#define EXCLigneDimInf 12
 
 
 class Cfichier {
 public:
+	//Parseur
 	static CMatrices<double> FICLireMatrice(char* pcChemin);
 	//Fonctions de handle mauvaise mise en forme
 	static char * FICMinuscule(char* pcChaine);
