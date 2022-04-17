@@ -21,13 +21,17 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	if (fichier.is_open()) {
 
 		//On récupère le type de données
-		fichier.getline(pcLigne, STR_LENGTH);
+		do
+		{
+			fichier.getline(pcLigne, STR_LENGTH);
+			FICSupp_Tab_Espace(pcLigne);
+		} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
 		pcToken = strtok(pcLigne, "=");
 		pcToken = strtok(NULL, "=");
 		if (pcToken == nullptr) {
 			throw CException(EXCParserPointeurNul);
 		}
-		if (strcmp(FICMinuscule(pcToken), "double") == 0){
+		if (tolower(pcToken[0]) == 'd') {
 
 			//On récupère le nombre de lignes
 			fichier.getline(pcLigne, STR_LENGTH);
@@ -122,7 +126,7 @@ void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 		}
 	}
 	//Traitement des espaces dans le cas ou une tabulation n'est pas en début de ligne.
-	if (pcChaine[0] == ' ') {
+	else {
 		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
 			if (pcChaine[uiboucle1] == ' ') {
 				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
