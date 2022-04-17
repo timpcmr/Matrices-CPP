@@ -1,8 +1,14 @@
 #ifndef MAT
 #define MAT
+
 #include <iostream>
 #include <cstdio>
+#include <typeinfo>
+#include "CException.h"
+
 using namespace std;
+
+
 template<class MType> class CMatrices {
 private:
 	//Atributs
@@ -146,12 +152,10 @@ template<class MType>
 void CMatrices<MType>::MATAfficherMatrice()
 {
 	unsigned int uiboucle1, uiboucle2;
-	/*if (MATLireNbLignes() > 0 && MATLireNbColonnes() > 0) {
-		cout << "Type des éléments : " << typeid(MATLireElement(0, 0)) << endl;
-	}*/
-
+	
+	cout << "Type des elements : " << typeid(MATLireElement(0,0)).name() << endl;
 	cout << "Nombre de lignes : " << MATLireNbLignes() << endl;
-	cout << "Nombre de Colonnes : " << MATLireNbColonnes() << endl;
+	cout << "Nombre de colonnes : " << MATLireNbColonnes() << endl << endl;
 
 	for (uiboucle1 = 0; uiboucle1 < uiMATNbLignes; uiboucle1++) {
 		for (uiboucle2 = 0; uiboucle2 < uiMATNbColonnes; uiboucle2++) {
@@ -159,12 +163,71 @@ void CMatrices<MType>::MATAfficherMatrice()
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 template<class MType>
 void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MATParam)
 {
 	pMTPMATContenu[uiLigne][uiColonne] = MATParam;
+}
+
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) const
+{
+	if (MATLireNbLignes() != MATadd.MATLireNbLignes()) {
+		throw CException(EXCDimLigne);
+	}
+	if (MATLireNbColonnes() != MATadd.MATLireNbColonnes()) {
+		throw CException(EXCDimColonne);
+	}
+	if (MATLireNbLignes() < 0) {
+		throw CException(EXCDimLigneNeg);
+	}
+	if (MATLireNbColonnes < 0) {
+		throw CException(EXCDimColonneNeg);
+	}
+	if (typeid(MATLireElement(0, 0)).name() != typeid(MATadd.MATLireElement(0, 0)).name()) {
+		throw CException(EXCErrTypeMat);
+	}
+	unsigned int uiboucle1, uiboucle2;
+	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
+
+	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
+		for (uiboucle2; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) + MATadd.MATLireElement(uiboucle1, uiboucle2));
+		}
+	}
+	return MATretour;
+}
+
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) const
+{
+	if (MATLireNbLignes() != MATdiff.MATLireNbLignes()) {
+		throw CException(EXCDimLigne);
+	}
+	if (MATLireNbColonnes() != MATdiff.MATLireNbColonnes()) {
+		throw CException(EXCDimColonne);
+	}
+	if (MATLireNbLignes() < 0) {
+		throw CException(EXCDimLigneNeg);
+	}
+	if (MATLireNbColonnes < 0) {
+		throw CException(EXCDimColonneNeg);
+	}
+	if (typeid(MATLireElement(0, 0)).name() != typeid(MATdiff.MATLireElement(0, 0)).name()) {
+		throw CException(EXCErrTypeMat);
+	}
+	unsigned int uiboucle1, uiboucle2;
+	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
+
+	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
+		for (uiboucle2; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) - MATdiff.MATLireElement(uiboucle1, uiboucle2));
+		}
+	}
+	return MATretour;
 }
 
 
