@@ -17,6 +17,8 @@
 #define EXCLigneDimInf 12
 #define EXCDimLigne 13
 #define EXCDimColonne 14
+#define EXCDimMatMult 15
+#define EXCDivZero 16
 
 
 class CException

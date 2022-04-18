@@ -187,14 +187,12 @@ inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) con
 	if (MATLireNbColonnes < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
-	if (typeid(MATLireElement(0, 0)).name() != typeid(MATadd.MATLireElement(0, 0)).name()) {
-		throw CException(EXCErrTypeMat);
-	}
+
 	unsigned int uiboucle1, uiboucle2;
 	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
 
 	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
-		for (uiboucle2; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+		for (uiboucle2 = 0; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
 			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) + MATadd.MATLireElement(uiboucle1, uiboucle2));
 		}
 	}
@@ -216,35 +214,60 @@ inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) co
 	if (MATLireNbColonnes < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
-	if (typeid(MATLireElement(0, 0)).name() != typeid(MATdiff.MATLireElement(0, 0)).name()) {
-		throw CException(EXCErrTypeMat);
-	}
+
 	unsigned int uiboucle1, uiboucle2;
 	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
 
 	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
-		for (uiboucle2; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+		for (uiboucle2 = 0; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
 			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) - MATdiff.MATLireElement(uiboucle1, uiboucle2));
 		}
 	}
 	return MATretour;
 }
 
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) const
+{
+	if(MATLireNbColonnes() != MATmult.MATLireNbLignes()) {
+		throw CException(EXCDimMatMult);
+	}
+	if (MATLireNbLignes() < 0) {
+		throw CException(EXCDimLigneNeg);
+	}
+	if (MATLireNbColonnes < 0) {
+		throw CException(EXCDimColonneNeg);
+	}
 
+	unsigned int uiboucle1, uiboucle2, uiboucle3;
+	CMatrices<MType> MATretour(MATLireNbLignes(), MATmult.MATLireNbColonnes());
+	MType MTPsomme;
+
+	for (uiboucle1 = 0; uiboucle1 < MATretour.MATLireNbLignes(); uiboucle1++) {
+		for (uiboucle2; uiboucle2 < MATretour.MATLireNbColonnes(); uiboucle2++) {
+			MTPsomme = MType();
+			for (uiboucle3 = 0; uiboucle3 < MATLireNbColonnes(); uiboucle3++) {
+				MTPsomme += MATLireElement(uiboucle1, uiboucle3) * MATmult.MATLireElement(uiboucle3, uiboucle2);
+			}
+			MATretour.MATModifierCase(uiboucle1, uiboucle2, MTPsomme);
+		}
+	}
+	return MATretour;
+}
 
 template<class MType>
 inline CMatrices<MType> CMatrices<MType>::MATTransposer(CMatrices<MType> MATMatrice)
 {
-	CMatrices<MType> retour(MATMatrice.MATLireNbColonnes(), MATMatrice.MATLireNbLignes());
+	CMatrices<MType> MATretour(MATMatrice.MATLireNbColonnes(), MATMatrice.MATLireNbLignes());
 	unsigned int uiBoucle1, uiBoucle2;
-	for (uiBoucle1 = 0; uiBoucle1 < retour.MATLireNbLignes(); uiBoucle1++) {
-		for (uiBoucle2 = 0; uiBoucle2 < retour.MATLireNbColonnes(); uiBoucle2++) {
-			retour.MATModifierCase(uiBoucle1, uiBoucle2, MATMatrice.MATLireElement(uiBoucle2, uiBoucle1));
+	for (uiBoucle1 = 0; uiBoucle1 < MATretour.MATLireNbLignes(); uiBoucle1++) {
+		for (uiBoucle2 = 0; uiBoucle2 < MATretour.MATLireNbColonnes(); uiBoucle2++) {
+			MATretour.MATModifierCase(uiBoucle1, uiBoucle2, MATMatrice.MATLireElement(uiBoucle2, uiBoucle1));
 		}
 	}
 
 
-	return retour;
+	return MATretour;
 }
 
 
