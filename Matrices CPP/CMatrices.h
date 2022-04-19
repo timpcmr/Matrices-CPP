@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <typeinfo>
 #include "CException.h"
+//#include "COperations.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ public:
 	CMatrices<MType> operator+(CMatrices<MType> MATadd)const;
 	CMatrices<MType> operator-(CMatrices<MType> MATdiff)const;
 	CMatrices<MType> operator*(CMatrices<MType> MATmult)const;
+	CMatrices<MType> operator*(double dComposante)const;
 	CMatrices<MType> operator=(CMatrices<MType> MATegal)const;
 
 	//Méthodes Universelles (ne dépendent pas du type)
@@ -250,6 +252,27 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 				MTPsomme += MATLireElement(uiboucle1, uiboucle3) * MATmult.MATLireElement(uiboucle3, uiboucle2);
 			}
 			MATretour.MATModifierCase(uiboucle1, uiboucle2, MTPsomme);
+		}
+	}
+	return MATretour;
+}
+
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::operator*(double dComposante) const
+{
+	if (MATLireNbLignes() < 0) {
+		throw CException(EXCDimLigneNeg);
+	}
+	if (MATLireNbColonnes < 0) {
+		throw CException(EXCDimColonneNeg);
+	}
+
+	unsigned int uiboucle1, uiboucle2;
+	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
+
+	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
+		for (uiboucle2 = 0; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) * dComposante);
 		}
 	}
 	return MATretour;
