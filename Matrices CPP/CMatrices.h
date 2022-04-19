@@ -21,14 +21,14 @@ public:
 	//Constructeurs et destructeurs
 	CMatrices<MType>();
 	CMatrices<MType>(unsigned int uiParam1, unsigned int uiParam2);
-	CMatrices<MType>(CMatrices<MType> &MATparam);
+	CMatrices<MType>(const CMatrices<MType> &MATparam);
 	~CMatrices<MType>();
 
 	//Accesseurs
-	unsigned int MATLireNbLignes();
-	unsigned int MATLireNbColonnes();
-	MType MATLireElement(unsigned int uiLigne, unsigned int uiColonne);
-	void MATAfficherMatrice();
+	unsigned int MATLireNbLignes()const;
+	unsigned int MATLireNbColonnes()const;
+	MType MATLireElement(unsigned int uiLigne, unsigned int uiColonne)const;
+	void MATAfficherMatrice()const;
 	
 	//Modifieurs
 	void MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MTPparam);
@@ -39,8 +39,8 @@ public:
 	CMatrices<MType> operator+(CMatrices<MType> MATadd)const;
 	CMatrices<MType> operator-(CMatrices<MType> MATdiff)const;
 	CMatrices<MType> operator*(CMatrices<MType> MATmult)const;
-	CMatrices<MType> operator*(double dComposante)const;
-	CMatrices<MType> operator=(CMatrices<MType> MATegal)const;
+	CMatrices<MType> operator*(const double dComposante)const;
+	CMatrices<MType> & operator=(CMatrices<MType> MATegal);
 
 	//Méthodes Universelles (ne dépendent pas du type)
 	CMatrices<MType> MATTransposer(CMatrices<MType> MATMatrice);
@@ -102,7 +102,7 @@ inline CMatrices<MType>::CMatrices()
 **** Entraîne : La construction d'un objet CMatrices copié de MATparam  		 ****
 *************************************************************************************/
 template<class MType>
-CMatrices<MType>::CMatrices(CMatrices<MType>& MATparam)
+CMatrices<MType>::CMatrices(const CMatrices<MType>& MATparam)
 {
 	unsigned int uiboucle1, uiboucle2;
 	uiMATNbColonnes = MATparam.MATLireNbColonnes();
@@ -133,25 +133,25 @@ CMatrices<MType>::~CMatrices()
 
 
 template<class MType>
-inline unsigned int CMatrices<MType>::MATLireNbLignes()
+inline unsigned int CMatrices<MType>::MATLireNbLignes()const
 {
 	return uiMATNbLignes;
 }
 
 template<class MType>
-inline unsigned int CMatrices<MType>::MATLireNbColonnes()
+inline unsigned int CMatrices<MType>::MATLireNbColonnes()const
 {
 	return uiMATNbColonnes;
 }
 
 template<class MType>
-MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColonne)
+MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColonne)const
 {
 	return pMTPMATContenu[uiLigne][uiColonne];
 }
 
 template<class MType>
-void CMatrices<MType>::MATAfficherMatrice()
+void CMatrices<MType>::MATAfficherMatrice()const
 {
 	unsigned int uiboucle1, uiboucle2;
 	
@@ -383,7 +383,7 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 }
 
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator*(double dComposante) const
+inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCDimLigneNeg);
@@ -401,6 +401,27 @@ inline CMatrices<MType> CMatrices<MType>::operator*(double dComposante) const
 		}
 	}
 	return MATretour;
+}
+
+template<class MType>
+inline CMatrices<MType> & CMatrices<MType>::operator=(CMatrices<MType> MATegal)
+{
+	unsigned int uiBoucle1, uiBoucle2;
+
+	if (MATLireNbLignes() != MATegal.MATLireNbLignes()) {
+		MATModifierNombreLignes(MATegal.MATLireNbLignes());
+	}
+	if (MATLireNbColonnes() != MATegal.MATLireNbColonnes()) {
+		MATModifierNombreColonnes(MATegal.MATLireNbColonnes());
+	}
+
+	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
+		for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
+			MATModifierCase(uiBoucle1, uiBoucle2, MATegal.MATLireElement(uiBoucle1, uiBoucle2));
+		}
+	}
+
+	return *this;
 }
 
 template<class MType>
