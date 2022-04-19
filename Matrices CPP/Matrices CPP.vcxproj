@@ -144,7 +144,6 @@
     <ClCompile Include="CException.cpp" />
     <ClCompile Include="CFichier.cpp" />
     <ClCompile Include="mainMatrices.cpp" />
-    <ClCompile Include="COperations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CException.h" />
