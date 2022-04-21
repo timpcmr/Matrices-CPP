@@ -28,7 +28,7 @@ int CException::EXCLireErreur()
 **** Sorties :	                                         	            ****
 **** Entraîne : Modifie la valeur de l'exception                        ****
 ****************************************************************************/
-void CException::EXCSetValue(int iParam)
+void CException::EXCChangerValeur(int iParam)
 {
 	iEXCValeur = iParam;
 }

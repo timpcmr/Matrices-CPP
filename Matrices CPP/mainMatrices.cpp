@@ -22,9 +22,12 @@ int main(int argc, char* argv[])
     cout << "Hello World!\n";
     system("pause");*/
     unsigned int uiBoucleLire;
+
+    CMatrices<double>* pMATmatrices[argc - 1];
+
     for (uiBoucleLire = 0; uiBoucleLire < argc - 1; uiBoucleLire++) {
         try {
-            CFichier::FICLireMatrice(argv[uiBoucleLire]);
+            pMATmatrices[uiBoucleLire] = Cfichier::FICLireMatrice(argv[uiBoucleLire]);
         }
         catch (CException CEXCException) {
             if(CEXCException.EXCLireErreur == EXCCheminNul){

@@ -3,6 +3,11 @@
 #include "CMatrices.h"
 #include <iostream>
 
+#define EXCDimLigne 13
+#define EXCDimColonne 14
+#define EXCDimMatMult 15
+#define EXCDivZero 16
+
 template<class MType>
 class Coperations
 {

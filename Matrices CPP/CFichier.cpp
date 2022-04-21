@@ -3,9 +3,6 @@
 
 using namespace std;
 
-
-
-
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
 	if (pcChemin == nullptr) {
