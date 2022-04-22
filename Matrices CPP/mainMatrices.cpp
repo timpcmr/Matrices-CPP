@@ -14,24 +14,17 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    /*char test[] = "M1.txt";
-    CMatrices<double> mattest;
-    mattest = Cfichier::FICLireMatrice(test);
-    mattest.MATAfficherMatrice();
-    Cfichier::FICLireMatrice(test);
-    cout << "Hello World!\n";
-    system("pause");*/
-
+    //Si au moins un chemin de fichier est donne
     if (argc > 1) {
 
         //PARSAGE DES FICHIERS
 
-        unsigned int uiBoucleLire;
+        int iBoucleLire; //int et pas unsigned int car sinon impossible de faire comparaison avec argc dans le for 
         CMatrices<double>* pMATmatrices = new CMatrices<double>[argc - 1];
 
-        for (uiBoucleLire = 0; uiBoucleLire < argc - 1; uiBoucleLire++) {
+        for (iBoucleLire = 0; iBoucleLire < argc - 1; iBoucleLire++) {
             try {
-                pMATmatrices[uiBoucleLire] = Cfichier::FICLireMatrice(argv[uiBoucleLire + 1]);
+                pMATmatrices[iBoucleLire] = Cfichier::FICLireMatrice(argv[iBoucleLire + 1]);
             }
             catch (CException EXCException) {
 
@@ -40,43 +33,43 @@ int main(int argc, char* argv[])
                 cout << "Erreur parseur : " << endl;
 
                 if (EXCException.EXCLireErreur() == EXCCheminNul) {
-                    cout << "Le chemin du fichier " << argv[uiBoucleLire + 1] << " est nul !" << endl;
+                    cout << "Le chemin du fichier " << argv[iBoucleLire + 1] << " est nul !" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCParserPointeurNul) {
-                    cout << "Erreur pointeur sur le fichier " << argv[uiBoucleLire + 1] << "!" << endl;
+                    cout << "Erreur pointeur sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCDimLigneNeg) {
-                    cout << "Le nombre de lignes indique est negatif sur le fichier " << argv[uiBoucleLire + 1] << "!" << endl;
+                    cout << "Le nombre de lignes indique est negatif sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCDimColonneNeg) {
-                    cout << "Le nombre de colonnes indique est negatif sur le fichier " << argv[uiBoucleLire + 1] << "!" << endl;
+                    cout << "Le nombre de colonnes indique est negatif sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCErrTypeMat) {
-                    cout << "Le type de valeurs donnees pour la matrice " << argv[uiBoucleLire + 1] << " n'est pas de type double !" << endl;
+                    cout << "Le type de valeurs donnees pour la matrice " << argv[iBoucleLire + 1] << " n'est pas de type double !" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCFichierNonOuvert) {
-                    cout << "Le chemin donne pour le fichier " << argv[uiBoucleLire + 1] << " n'est pas valide !" << endl;
+                    cout << "Le chemin donne pour le fichier " << argv[iBoucleLire + 1] << " n'est pas valide !" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCDimColonneNeg) {
-                    cout << "La dimension de la colonne est négative sur le fichier " << argv[uiBoucleLire + 1] << "!" << endl;
+                    cout << "La dimension de la colonne est négative sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCColonneDimInf) {
-                    cout << "Le nombre de colonnes indique sur le fichier " << argv[uiBoucleLire + 1] << " est inferieur au nombre de valeurs presentes!" << endl;
+                    cout << "Le nombre de colonnes indique sur le fichier " << argv[iBoucleLire + 1] << " est inferieur au nombre de valeurs presentes!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCColonneDimSup) {
-                    cout << "Le nombre de colonnes indique sur le fichier " << argv[uiBoucleLire + 1] << " est superieur au nombre de valeurs presentes!" << endl;
+                    cout << "Le nombre de colonnes indique sur le fichier " << argv[iBoucleLire + 1] << " est superieur au nombre de valeurs presentes!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCLigneDimInf) {
-                    cout << "Le nombre de lignes indique sur le fichier " << argv[uiBoucleLire + 1] << " est inferieur au nombre de valeurs presentes!" << endl;
+                    cout << "Le nombre de lignes indique sur le fichier " << argv[iBoucleLire + 1] << " est inferieur au nombre de valeurs presentes!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCLigneDimSup) {
-                    cout << "Le nombre de lignes indique sur le fichier " << argv[uiBoucleLire + 1] << " est superieur au nombre de valeurs presentes!" << endl;
+                    cout << "Le nombre de lignes indique sur le fichier " << argv[iBoucleLire + 1] << " est superieur au nombre de valeurs presentes!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCTokenNulMinuscule) {
-                    cout << "Erreur interne : L'argument passe a la fonction FICMinuscule est nul lors de l'utilisation du fichier  " << argv[uiBoucleLire + 1] << " !" << endl;
+                    cout << "Erreur interne : L'argument passe a la fonction FICMinuscule est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " !" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCTokenNulSuppEspace) {
-                    cout << "Erreur interne : L'argument passe a la fonction FICSupp_Tab_Espace est nul lors de l'utilisation du fichier  " << argv[uiBoucleLire + 1] << " !" << endl;
+                    cout << "Erreur interne : L'argument passe a la fonction FICSupp_Tab_Espace est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " !" << endl;
                 }
 
                 //Gestion fuites memoires
@@ -203,6 +196,49 @@ int main(int argc, char* argv[])
         //Affichage du resultat final
         cout << "----- RESULTAT DE L'ADDITION DES MATRICES -----" << endl;
         matSomme.MATAfficherMatrice();
+        cout << endl;
+
+        //OPERATION ALTERNANCE ADDITION SOUSTRACTION
+
+        CMatrices<double> matResultatAlternance(pMATmatrices[0].MATLireNbLignes(), pMATmatrices[0].MATLireNbColonnes());
+
+        for (uiBoucle = 0; uiBoucle < argc - 1; uiBoucle++) {
+            try {
+                if (uiBoucle % 2 == 0) {
+                    matResultatAlternance = matResultatAlternance + pMATmatrices[uiBoucle];
+                }
+                else {
+                    matResultatAlternance = matResultatAlternance - pMATmatrices[uiBoucle];
+                }
+            }
+            catch (CException EXCCexception) {
+
+                //Gestion erreurs (que la surcharge operateur + et -)
+
+                cout << "Erreur lors de l'addition des differentes matrices :" << endl;
+
+                if (EXCCexception.EXCLireErreur() == EXCMATDimColonneNeg) {
+                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                }
+                else if (EXCCexception.EXCLireErreur() == EXCMATDimLigneNeg) {
+                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                }
+                else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                }
+                else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                }
+
+                //Gestion memoire
+                delete[] pMATmatrices;
+                return 1;
+            }
+        }
+
+        // Affichage du resultat final
+        cout << "----- RESULTAT DE L'OPERATION ALTERNATIVE SUR LES MATRICES -----" << endl;
+        matResultatAlternance.MATAfficherMatrice();
         cout << endl;
 
         //PRODUIT DES MATRICES

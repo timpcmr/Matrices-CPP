@@ -183,7 +183,7 @@ template<class MType>
 inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
 {
 	if (uiLigne < 0) {
-		throw CException(EXCDimLigneNeg);
+		throw CException(EXCMATDimLigneNeg);
 	}
 
 	//Si fonction appelée inutilement
@@ -245,7 +245,7 @@ template<class MType>
 inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
 {
 	if (uiColonne < 0) {
-		throw CException(EXCDimColonneNeg);
+		throw CException(EXCMATDimColonneNeg);
 	}
 
 	//Si fonction appelée inutilement
@@ -335,16 +335,16 @@ template<class MType>
 inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) const
 {
 	if (MATLireNbLignes() != MATdiff.MATLireNbLignes()) {
-		throw CException(EXCDimLigne);
+		throw CException(EXCMATDimLigne);
 	}
 	if (MATLireNbColonnes() != MATdiff.MATLireNbColonnes()) {
-		throw CException(EXCDimColonne);
+		throw CException(EXCMATDimColonne);
 	}
 	if (MATLireNbLignes() < 0) {
-		throw CException(EXCDimLigneNeg);
+		throw CException(EXCMATDimLigneNeg);
 	}
 	if (MATLireNbColonnes < 0) {
-		throw CException(EXCDimColonneNeg);
+		throw CException(EXCMATDimColonneNeg);
 	}
 
 	unsigned int uiboucle1, uiboucle2;
