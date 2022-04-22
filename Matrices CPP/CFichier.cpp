@@ -140,7 +140,6 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 				throw CException(EXCLigneDimInf);
 			}
 
-			MATretour.MATAfficherMatrice();
 			return MATretour;
 		}
 		else {

@@ -5,7 +5,12 @@
 #include <cstdio>
 #include <typeinfo>
 #include "CException.h"
-//#include "COperations.h"
+
+#define EXCDimMatMult 15
+#define EXCMATDimLigneNeg 17
+#define EXCMATDimColonneNeg 18
+#define EXCMATDimLigne 19
+#define EXCMATDimColonne 20
 
 using namespace std;
 
@@ -303,16 +308,16 @@ template<class MType>
 inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) const
 {
 	if (MATLireNbLignes() != MATadd.MATLireNbLignes()) {
-		throw CException(EXCDimLigne);
+		throw CException(EXCMATDimLigne);
 	}
 	if (MATLireNbColonnes() != MATadd.MATLireNbColonnes()) {
-		throw CException(EXCDimColonne);
+		throw CException(EXCMATDimColonne);
 	}
 	if (MATLireNbLignes() < 0) {
-		throw CException(EXCDimLigneNeg);
+		throw CException(EXCMATDimLigneNeg);
 	}
 	if (MATLireNbColonnes < 0) {
-		throw CException(EXCDimColonneNeg);
+		throw CException(EXCMATDimColonneNeg);
 	}
 
 	unsigned int uiboucle1, uiboucle2;
@@ -360,10 +365,10 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 		throw CException(EXCDimMatMult);
 	}
 	if (MATLireNbLignes() < 0) {
-		throw CException(EXCDimLigneNeg);
+		throw CException(EXCMATDimLigneNeg);
 	}
 	if (MATLireNbColonnes < 0) {
-		throw CException(EXCDimColonneNeg);
+		throw CException(EXCMATDimColonneNeg);
 	}
 
 	unsigned int uiboucle1, uiboucle2, uiboucle3;
@@ -386,10 +391,10 @@ template<class MType>
 inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
-		throw CException(EXCDimLigneNeg);
+		throw CException(EXCMATDimLigneNeg);
 	}
 	if (MATLireNbColonnes < 0) {
-		throw CException(EXCDimColonneNeg);
+		throw CException(EXCMATDimColonneNeg);
 	}
 
 	unsigned int uiboucle1, uiboucle2;
