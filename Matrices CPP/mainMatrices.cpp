@@ -40,40 +40,40 @@ int main(int argc, char* argv[])
                 if (CEXCException.EXCLireErreur() == EXCCheminNul) {
                     cout << "Le chemin du fichier " << argv[uiBoucleLire] << " est nul !" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCParserPointeurNul) {
+                else if (CEXCException.EXCLireErreur() == EXCParserPointeurNul) {
                     cout << "Erreur pointeur sur le fichier " << argv[uiBoucleLire] << "!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCDimLigneNeg) {
+                else if (CEXCException.EXCLireErreur() == EXCDimLigneNeg) {
                     cout << "Le nombre de lignes indique est negatif sur le fichier " << argv[uiBoucleLire] << "!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCDimColonneNeg) {
+                else if (CEXCException.EXCLireErreur() == EXCDimColonneNeg) {
                     cout << "Le nombre de colonnes indique est negatif sur le fichier " << argv[uiBoucleLire] << "!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCErrTypeMat) {
+                else if (CEXCException.EXCLireErreur() == EXCErrTypeMat) {
                     cout << "Le type de valeurs donnees pour la matrice " << argv[uiBoucleLire] << " n'est pas de type double !" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCFichierNonOuvert) {
+                else if (CEXCException.EXCLireErreur() == EXCFichierNonOuvert) {
                     cout << "Le chemin donne pour le fichier " << argv[uiBoucleLire] << " n'est pas valide !" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCDimColonneNeg) {
+                else if (CEXCException.EXCLireErreur() == EXCDimColonneNeg) {
                     cout << "La dimension de la colonne est négative sur le fichier " << argv[uiBoucleLire] << "!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCColonneDimInf) {
+                else if (CEXCException.EXCLireErreur() == EXCColonneDimInf) {
                     cout << "Le nombre de colonnes indique sur le fichier " << argv[uiBoucleLire] << " est inferieur au nombre de valeurs presentes!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCColonneDimSup) {
+                else if (CEXCException.EXCLireErreur() == EXCColonneDimSup) {
                     cout << "Le nombre de colonnes indique sur le fichier " << argv[uiBoucleLire] << " est superieur au nombre de valeurs presentes!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCLigneDimInf) {
+                else if (CEXCException.EXCLireErreur() == EXCLigneDimInf) {
                     cout << "Le nombre de lignes indique sur le fichier " << argv[uiBoucleLire] << " est inferieur au nombre de valeurs presentes!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCLigneDimSup) {
+                else if (CEXCException.EXCLireErreur() == EXCLigneDimSup) {
                     cout << "Le nombre de lignes indique sur le fichier " << argv[uiBoucleLire] << " est superieur au nombre de valeurs presentes!" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCTokenNulMinuscule) {
+                else if (CEXCException.EXCLireErreur() == EXCTokenNulMinuscule) {
                     cout << "Erreur interne : L'argument passe a la fonction FICMinuscule est nul lors de l'utilisation du fichier  " << argv[uiBoucleLire] << " !" << endl;
                 }
-                if (CEXCException.EXCLireErreur() == EXCTokenNulSuppEspace) {
+                else if (CEXCException.EXCLireErreur() == EXCTokenNulSuppEspace) {
                     cout << "Erreur interne : L'argument passe a la fonction FICSupp_Tab_Espace est nul lors de l'utilisation du fichier  " << argv[uiBoucleLire] << " !" << endl;
                 }
 
