@@ -1,6 +1,7 @@
 // Matrices CPP.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
 
+#pragma warning(disable : 6385)
 
 
 #include <iostream>
@@ -96,7 +97,7 @@ int main(int argc, char* argv[])
         int iBoucle; //int et pas unsigned int car sinon impossible de faire comparaison avec argc dans le for 
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                cout << "Matrice " << iBoucle << " :" << endl;
+                cout << "Matrice " << iBoucle + 1 << " :" << endl;
                 matMatriceTampon = pMATmatrices[iBoucle] * dC;
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
@@ -134,7 +135,7 @@ int main(int argc, char* argv[])
 
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                cout << "Matrice " << iBoucle << " :" << endl;
+                cout << "Matrice " << iBoucle + 1 << " :" << endl;
                 matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[iBoucle], dC);
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
