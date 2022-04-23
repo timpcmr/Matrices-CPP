@@ -30,8 +30,6 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			delete[] pcToken;
 			throw CException(EXCParserPointeurNul);
 		}
-		//Traitement d'éventuels espaces dans le type de fichiers
-		//FICSupp_Tab_Espace(pcToken);
 
 		if (strcmp(FICMinuscule(pcToken), "double") == 0) {
 

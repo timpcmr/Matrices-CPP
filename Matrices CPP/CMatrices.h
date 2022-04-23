@@ -229,7 +229,7 @@ inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
 	//On traite le changement de tableau de contenu:
 
 	//On désalloue l'ancien contenu
-	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes; uiBoucle1++) {
+	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
 		delete[] pMTPMATContenu[uiBoucle1];
 	}
 	delete[] pMTPMATContenu;
@@ -291,7 +291,7 @@ inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
 	//On traite le changement de tableau de contenu:
 
 	//On désalloue l'ancien contenu
-	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes; uiBoucle1++) {
+	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
 		delete[] pMTPMATContenu[uiBoucle1];
 	}
 	delete[] pMTPMATContenu;
@@ -316,7 +316,7 @@ inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) con
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
 	}
-	if (MATLireNbColonnes < 0) {
+	if (MATLireNbColonnes() < 0) {
 		throw CException(EXCMATDimColonneNeg);
 	}
 
@@ -343,7 +343,7 @@ inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) co
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
 	}
-	if (MATLireNbColonnes < 0) {
+	if (MATLireNbColonnes() < 0) {
 		throw CException(EXCMATDimColonneNeg);
 	}
 
@@ -367,7 +367,7 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
 	}
-	if (MATLireNbColonnes < 0) {
+	if (MATLireNbColonnes() < 0) {
 		throw CException(EXCMATDimColonneNeg);
 	}
 
@@ -376,7 +376,7 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 	MType MTPsomme;
 
 	for (uiboucle1 = 0; uiboucle1 < MATretour.MATLireNbLignes(); uiboucle1++) {
-		for (uiboucle2; uiboucle2 < MATretour.MATLireNbColonnes(); uiboucle2++) {
+		for (uiboucle2 = 0; uiboucle2 < MATretour.MATLireNbColonnes(); uiboucle2++) {
 			MTPsomme = MType();
 			for (uiboucle3 = 0; uiboucle3 < MATLireNbColonnes(); uiboucle3++) {
 				MTPsomme += MATLireElement(uiboucle1, uiboucle3) * MATmult.MATLireElement(uiboucle3, uiboucle2);
@@ -393,7 +393,7 @@ inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) co
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
 	}
-	if (MATLireNbColonnes < 0) {
+	if (MATLireNbColonnes() < 0) {
 		throw CException(EXCMATDimColonneNeg);
 	}
 

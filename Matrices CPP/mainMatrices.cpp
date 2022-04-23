@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
                     cout << "Le nombre de lignes indique sur le fichier " << argv[iBoucleLire + 1] << " est superieur au nombre de valeurs presentes!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCTokenNulMinuscule) {
-                    cout << "Erreur interne : L'argument passe a la fonction FICMinuscule est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " !" << endl;
+                    cout << "Erreur interne : L'argument passe a la fonction FICMinuscule est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " ! (Aucun type de donnees specifie)" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCTokenNulSuppEspace) {
                     cout << "Erreur interne : L'argument passe a la fonction FICSupp_Tab_Espace est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " !" << endl;
@@ -93,11 +93,11 @@ int main(int argc, char* argv[])
         cout << "----- RESULTATS DE LA MULTIPLICATION PAR " << dC << " -----" << endl;
 
         CMatrices<double> matMatriceTampon;
-        unsigned int uiBoucle;
-        for (uiBoucle = 0; uiBoucle < argc - 1; uiBoucle++) {
+        int iBoucle; //int et pas unsigned int car sinon impossible de faire comparaison avec argc dans le for 
+        for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                cout << "Matrice " << uiBoucle << " :" << endl;
-                matMatriceTampon = pMATmatrices[uiBoucle] * dC;
+                cout << "Matrice " << iBoucle << " :" << endl;
+                matMatriceTampon = pMATmatrices[iBoucle] * dC;
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
             }
@@ -108,10 +108,10 @@ int main(int argc, char* argv[])
                 cout << "Erreur lors de la multiplication par la constante C :" << endl;
 
                 if (EXCCexception.EXCLireErreur() == EXCMATDimColonneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de colonnes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
 
                 //Gestion memoire
@@ -132,10 +132,10 @@ int main(int argc, char* argv[])
 
         cout << "----- RESULTATS DE LA DIVISION PAR " << dC << " -----" << endl;
 
-        for (uiBoucle = 0; uiBoucle < argc - 1; uiBoucle++) {
+        for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                cout << "Matrice " << uiBoucle << " :" << endl;
-                matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[uiBoucle], dC);
+                cout << "Matrice " << iBoucle << " :" << endl;
+                matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[iBoucle], dC);
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
             }
@@ -146,10 +146,10 @@ int main(int argc, char* argv[])
                 cout << "Erreur lors de la multiplication par la constante C :" << endl;
 
                 if (EXCCexception.EXCLireErreur() == EXCDimColonneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de colonnes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCDimLigneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCDivZero) {
                     cout << "La valeur entree est 0, la division est impossible. " << endl;
@@ -164,9 +164,9 @@ int main(int argc, char* argv[])
 
         CMatrices<double> matSomme(pMATmatrices[0].MATLireNbLignes(), pMATmatrices[0].MATLireNbColonnes());
 
-        for (uiBoucle = 0; uiBoucle < argc - 1; uiBoucle++) {
+        for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                matSomme = matSomme + pMATmatrices[uiBoucle];
+                matSomme = matSomme + pMATmatrices[iBoucle];
             }
             catch (CException EXCCexception) {
 
@@ -175,16 +175,16 @@ int main(int argc, char* argv[])
                 cout << "Erreur lors de l'addition des differentes matrices :" << endl;
 
                 if (EXCCexception.EXCLireErreur() == EXCMATDimColonneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de colonnes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
                 }
 
                 //Gestion memoire
@@ -202,13 +202,13 @@ int main(int argc, char* argv[])
 
         CMatrices<double> matResultatAlternance(pMATmatrices[0].MATLireNbLignes(), pMATmatrices[0].MATLireNbColonnes());
 
-        for (uiBoucle = 0; uiBoucle < argc - 1; uiBoucle++) {
+        for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
-                if (uiBoucle % 2 == 0) {
-                    matResultatAlternance = matResultatAlternance + pMATmatrices[uiBoucle];
+                if (iBoucle % 2 == 0) {
+                    matResultatAlternance = matResultatAlternance + pMATmatrices[iBoucle];
                 }
                 else {
-                    matResultatAlternance = matResultatAlternance - pMATmatrices[uiBoucle];
+                    matResultatAlternance = matResultatAlternance - pMATmatrices[iBoucle];
                 }
             }
             catch (CException EXCCexception) {
@@ -218,16 +218,16 @@ int main(int argc, char* argv[])
                 cout << "Erreur lors de l'addition des differentes matrices :" << endl;
 
                 if (EXCCexception.EXCLireErreur() == EXCMATDimColonneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de colonnes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigneNeg) {
-                    cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                    cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[uiBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
                 }
 
                 //Gestion memoire
@@ -245,9 +245,9 @@ int main(int argc, char* argv[])
 
         CMatrices<double> matProduit(pMATmatrices[0]);
         if (argc > 2) {
-            for (uiBoucle = 1; uiBoucle < argc - 1; uiBoucle++) {
+            for (iBoucle = 1; iBoucle < argc - 1; iBoucle++) {
                 try {
-                    matProduit = matProduit * pMATmatrices[uiBoucle];
+                    matProduit = matProduit * pMATmatrices[iBoucle];
                 }
                 catch (CException EXCCexception) {
 
@@ -256,13 +256,13 @@ int main(int argc, char* argv[])
                     cout << "Erreur lors de l'addition des differentes matrices :" << endl;
 
                     if (EXCCexception.EXCLireErreur() == EXCMATDimColonneNeg) {
-                        cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de colonnes negatif !" << endl;
+                        cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de colonnes negatif !" << endl;
                     }
                     else if (EXCCexception.EXCLireErreur() == EXCMATDimLigneNeg) {
-                        cout << "La matrice du fichier " << argv[uiboucle + 1] << " a un nombre de lignes negatif !" << endl;
+                        cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                     }
                     else if (EXCCexception.EXCLireErreur() == EXCDimMatMult) {
-                        cout << "La matrice du fichier " << argv[uiBoucle - 1] << " a des dimensions incompatibles avec la matrice du fichier " << argv[uiBoucle] << " pour les faire se multiplier !" << endl;
+                        cout << "La matrice du fichier " << argv[iBoucle - 1] << " a des dimensions incompatibles avec la matrice du fichier " << argv[iBoucle] << " pour les faire se multiplier !" << endl;
                     }
 
                     //Gestion memoire
@@ -275,10 +275,14 @@ int main(int argc, char* argv[])
         cout << "----- RESULTAT DE LA MULTIPLICATION DES MATRICES -----" << endl;
         matProduit.MATAfficherMatrice();
         cout << endl;
+
+
+        delete[] pMATmatrices;
+        return 0;
     }
     else {
         cout << "Aucun fichier passe en argument !" << endl;
         return 1;
     }
-    return 0;
+
 }

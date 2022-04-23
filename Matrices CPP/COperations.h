@@ -24,7 +24,7 @@ inline CMatrices<MType> Coperations<MType>::OPEMultiplication(const double dComp
 	if (MATparam.MATLireNbLignes() < 0) {
 		throw CException(EXCDimLigneNeg);
 	}
-	if (MATparam.MATLireNbColonnes < 0) {
+	if (MATparam.MATLireNbColonnes() < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
 
@@ -45,7 +45,7 @@ CMatrices<MType> Coperations<MType>::OPEMultiplication(CMatrices<MType> MATparam
 	if (MATparam.MATLireNbLignes() < 0) {
 		throw CException(EXCDimLigneNeg);
 	}
-	if (MATparam.MATLireNbColonnes < 0) {
+	if (MATparam.MATLireNbColonnes() < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
 
@@ -66,7 +66,7 @@ CMatrices<MType> Coperations<MType>::OPEDivision(const double dComposante, CMatr
 	if (MATparam.MATLireNbLignes() < 0) {
 		throw CException(EXCDimLigneNeg);
 	}
-	if (MATparam.MATLireNbColonnes < 0) {
+	if (MATparam.MATLireNbColonnes() < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
 	if (dComposante == 0) {
@@ -90,7 +90,7 @@ CMatrices<MType> Coperations<MType>::OPEDivision(CMatrices<MType> MATparam, cons
 	if (MATparam.MATLireNbLignes() < 0) {
 		throw CException(EXCDimLigneNeg);
 	}
-	if (MATparam.MATLireNbColonnes < 0) {
+	if (MATparam.MATLireNbColonnes() < 0) {
 		throw CException(EXCDimColonneNeg);
 	}
 	if (dComposante == 0) {
