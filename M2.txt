@@ -1,9 +1,0 @@
-TypeMatrice =double
-NombreLignes= 3
-NombreColonnes=3
-Matrice=[
--0.5 48 2
-12 3.7 6
-
--8 1 0
-]

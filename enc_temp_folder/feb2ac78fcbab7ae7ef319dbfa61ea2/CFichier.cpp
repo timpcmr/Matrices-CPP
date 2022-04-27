@@ -15,6 +15,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 	if (fichier.is_open()) {
 
 		char* pcLigne = new char[STR_LENGTH];
+		char* pcToken = new char[STR_LENGTH];
 
 		//On récupère le type de données
 		do
@@ -22,10 +23,11 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			fichier.getline(pcLigne, STR_LENGTH);
 			FICSupp_Tab_Espace(pcLigne);
 		} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
-		char *pcToken = strtok(pcLigne, "=");
+		pcToken = strtok(pcLigne, "=");
 		pcToken = strtok(NULL, "=");
 		if (pcToken == nullptr) {
 			delete[] pcLigne;
+			delete[] pcToken;
 			throw CException(EXCParserPointeurNul);
 		}
 
@@ -41,10 +43,12 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
 				delete[] pcLigne;
+				delete[] pcToken;
 				throw CException(EXCParserPointeurNul);
 			}
 			else if (atoi(pcToken) <= 0) {
 				delete[] pcLigne;
+				delete[] pcToken;
 				throw CException(EXCDimLigneNeg);
 			}
 			uiparsedLignes = (unsigned int)(atoi(pcToken));
@@ -59,10 +63,12 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 			pcToken = strtok(NULL, "=");
 			if (pcToken == nullptr) {
 				delete[] pcLigne;
+				delete[] pcToken;
 				throw CException(EXCParserPointeurNul);
 			}
 			else if (atoi(pcToken) < 0) {
 				delete[] pcLigne;
+				delete[] pcToken;
 				throw CException(EXCDimColonneNeg);
 			}
 			uiparsedColonnes = (unsigned int)(atoi(pcToken));
@@ -98,6 +104,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 				pcToken = strtok(pcLigne, " ");
 				if (pcToken[0] == ']') {
 					delete[] pcLigne;
+					delete[] pcToken;
 					throw CException(EXCLigneDimSup);
 				}
 				MATretour.MATModifierCase(uiboucle1, 0, atof(pcToken));
@@ -105,6 +112,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 					pcToken = strtok(NULL, " ");
 					if (pcToken == nullptr) {
 						delete[] pcLigne;
+						delete[] pcToken;
 						throw CException(EXCColonneDimSup);
 					}
 					MATretour.MATModifierCase(uiboucle1, uiboucle2, atof(pcToken));
@@ -112,6 +120,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 				pcToken = strtok(NULL, " ");
 				if (pcToken != nullptr) {
 					delete[] pcLigne;
+					delete[] pcToken;
 					throw CException(EXCColonneDimInf);
 				}
 
@@ -125,6 +134,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 
 			if (pcLigne[0] != ']') {
 				delete[] pcLigne;
+				delete[] pcToken;
 				throw CException(EXCLigneDimInf);
 			}
 
@@ -132,9 +142,11 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 		}
 		else {
 			delete[] pcLigne;
+			delete[] pcToken;
 			throw CException(EXCErrTypeMat);
 		}
 		delete[] pcLigne;
+		delete[] pcToken;
 	}
 	else {
 		throw CException(EXCFichierNonOuvert);

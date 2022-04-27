@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 int main(int argc, char* argv[])
 {
     //Si au moins un chemin de fichier est donne
@@ -108,7 +107,6 @@ int main(int argc, char* argv[])
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
                 cout << "Matrice " << iBoucle + 1 << " :" << endl;
-                //matMatriceTampon = pMATmatrices[iBoucle] * dC;
                 matMatriceTampon = dC * pMATmatrices[iBoucle];
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
@@ -139,7 +137,6 @@ int main(int argc, char* argv[])
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
                 cout << "Matrice " << iBoucle + 1 << " :" << endl;
-                //matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[iBoucle], dC);
                 matMatriceTampon = pMATmatrices[iBoucle] / dC;
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;

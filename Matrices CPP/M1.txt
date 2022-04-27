@@ -1,5 +1,5 @@
 TypeMatrice=double
-NombreLignes=3
+NombreLignes=0
 NombreColonnes=3
 Matrice=[
 	1 2 3
