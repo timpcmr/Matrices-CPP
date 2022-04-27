@@ -150,7 +150,6 @@
     <ClInclude Include="CException.h" />
     <ClInclude Include="CFichier.h" />
     <ClInclude Include="CMatrices.h" />
-    <ClInclude Include="COperations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

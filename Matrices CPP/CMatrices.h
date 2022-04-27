@@ -11,6 +11,7 @@
 #include "CException.h"
 
 #define EXCDimMatMult 15
+#define EXCDivZero 16
 #define EXCMATDimLigneNeg 17
 #define EXCMATDimColonneNeg 18
 #define EXCMATDimLigne 19
@@ -49,6 +50,7 @@ public:
 	CMatrices<MType> operator-(CMatrices<MType> MATdiff)const;
 	CMatrices<MType> operator*(CMatrices<MType> MATmult)const;
 	CMatrices<MType> operator*(const double dComposante)const;
+	CMatrices<MType> operator/(const double dComposante)const;
 	CMatrices<MType> & operator=(CMatrices<MType> MATegal);
 
 	//Méthodes Universelles (ne dépendent pas du type)
@@ -407,6 +409,37 @@ inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) co
 	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
 		for (uiboucle2 = 0; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
 			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) * dComposante);
+		}
+	}
+	return MATretour;
+}
+//surcharger opérateur *
+template<class MType>
+inline CMatrices<MType> operator*(const double dComposante, const CMatrices<MType> MATmult)
+{
+	return MATmult * dComposante;
+}
+
+
+template<class MType>
+inline CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) const
+{
+	if (MATLireNbLignes() < 0) {
+		throw CException(EXCMATDimLigneNeg);
+	}
+	if (MATLireNbColonnes() < 0) {
+		throw CException(EXCMATDimColonneNeg);
+	}
+	if (dComposante == 0) {
+		throw CException(EXCDivZero);
+	}
+
+	unsigned int uiboucle1, uiboucle2;
+	CMatrices<MType> MATretour(MATLireNbLignes(), MATLireNbColonnes());
+
+	for (uiboucle1 = 0; uiboucle1 < MATLireNbLignes(); uiboucle1++) {
+		for (uiboucle2 = 0; uiboucle2 < MATLireNbColonnes(); uiboucle2++) {
+			MATretour.MATModifierCase(uiboucle1, uiboucle2, MATLireElement(uiboucle1, uiboucle2) / dComposante);
 		}
 	}
 	return MATretour;

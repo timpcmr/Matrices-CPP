@@ -3,9 +3,8 @@
 #include "CMatrices.h"
 #include "CException.h"
 #include <iostream>
-#include <assert.h>
 #include <cstring>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include <fstream>
 #include <cctype>

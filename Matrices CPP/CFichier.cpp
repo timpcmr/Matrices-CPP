@@ -46,7 +46,7 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 				delete[] pcToken;
 				throw CException(EXCParserPointeurNul);
 			}
-			else if (atoi(pcToken) < 0) {
+			else if (atoi(pcToken) <= 0) {
 				delete[] pcLigne;
 				delete[] pcToken;
 				throw CException(EXCDimLigneNeg);

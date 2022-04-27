@@ -5,10 +5,10 @@
 
 
 #include <iostream>
+#include <cstdlib>
 #include "CFichier.h"
 #include "CException.h"
 #include "CMatrices.h"
-#include "COperations.h"
 
 using namespace std;
 
@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
                     cout << "Erreur pointeur sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCDimLigneNeg) {
-                    cout << "Le nombre de lignes indique est negatif sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
+                    cout << "Le nombre de lignes indique est negatif ou nul sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
                 }
                 else if (EXCException.EXCLireErreur() == EXCDimColonneNeg) {
                     cout << "Le nombre de colonnes indique est negatif sur le fichier " << argv[iBoucleLire + 1] << "!" << endl;
@@ -87,6 +87,16 @@ int main(int argc, char* argv[])
 
         cout << "Saisissez une valeur et appuyez sur entree :" << endl;
         cin >> dC;
+		
+        if (dC == 0) {
+            cout << "La valeur entree est 0, la division sera impossible. " << endl;
+            while (dC == 0) {
+                cout << "Veuillez entrer une valeur valide pour la division :" << endl;
+                cin >> dC;
+            }
+        }
+        
+		
 
         //CALCULS AVEC LA VALEUR C SAISIE
         //MULTIPLICATION
@@ -98,7 +108,8 @@ int main(int argc, char* argv[])
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
                 cout << "Matrice " << iBoucle + 1 << " :" << endl;
-                matMatriceTampon = pMATmatrices[iBoucle] * dC;
+                //matMatriceTampon = pMATmatrices[iBoucle] * dC;
+                matMatriceTampon = dC * pMATmatrices[iBoucle];
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
             }
@@ -123,20 +134,13 @@ int main(int argc, char* argv[])
 
         //DIVISION
 
-        if (dC == 0) {
-            cout << "La valeur entree est 0, la division est impossible. " << endl;
-            while (dC == 0) {
-                cout << "Veuillez entrer une valeur valide pour la division :" << endl;
-                cin >> dC;
-            }
-        }
-
         cout << "----- RESULTATS DE LA DIVISION PAR " << dC << " -----" << endl;
 
         for (iBoucle = 0; iBoucle < argc - 1; iBoucle++) {
             try {
                 cout << "Matrice " << iBoucle + 1 << " :" << endl;
-                matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[iBoucle], dC);
+                //matMatriceTampon = Coperations<double>::OPEDivision(pMATmatrices[iBoucle], dC);
+                matMatriceTampon = pMATmatrices[iBoucle] / dC;
                 matMatriceTampon.MATAfficherMatrice();
                 cout << endl;
             }
