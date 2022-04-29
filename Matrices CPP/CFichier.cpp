@@ -3,6 +3,13 @@
 
 using namespace std;
 
+
+/******************************************************************************************************
+**** Entrées : char* pcChemin																	   ****
+**** Nécessite :																		  	       ****
+**** Sorties :	CMatrice MATretour																   ****
+**** Entraîne : Renvoie la matrice du fichier texte dont le chemin pcChemin est passé en paramètre ****
+******************************************************************************************************/
 CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 {
 	if (pcChemin == nullptr) {
@@ -147,7 +154,12 @@ CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
 
 }
 
-
+/***********************************************************************************************************************
+**** Entrées : char* pcChaine																					    ****
+**** Nécessite :																		  							****
+**** Sorties :	char* pcChaine																						****
+**** Entraîne : Renvoie la chaine pcChaine passée en paramètre et dont toutes les lettres sont passées en minuscule ****
+***********************************************************************************************************************/
 char * Cfichier::FICMinuscule(char* pcChaine)
 {
 	if (pcChaine == nullptr) {
@@ -161,6 +173,12 @@ char * Cfichier::FICMinuscule(char* pcChaine)
 	return pcChaine;
 }
 
+/******************************************************************************************************************
+**** Entrées : char* pcChaine																				   ****
+**** Nécessite :																		  					   ****
+**** Sorties :																								   ****
+**** Entraîne : Supprime les tabulations ou les espaces d'une chaine de caractère pcChaine passée en paramètre ****
+******************************************************************************************************************/
 void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 {
 	if (pcChaine == nullptr) {
