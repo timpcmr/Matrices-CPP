@@ -1,5 +1,3 @@
-// Matrices CPP.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
 
 #pragma warning(disable : 6385)
 
@@ -11,6 +9,7 @@
 #include "CMatrices.h"
 
 using namespace std;
+
 
 int main(int argc, char* argv[])
 {
@@ -82,16 +81,22 @@ int main(int argc, char* argv[])
 
         //SAISIE DE LA VALEUR C
 
+        //Passage par un char* puis atof pour empecher la possibilité de saisir des valeurs non-numeriques
+		//Car atof renvoie 0 si la valeur saisie n'est pas un nombre. Néanmoins il est possible de saisir un mélange de lettres et de chiffres, 
+        //seuls les chiffres seront extraits si ils sont placés avant les lettres.
+		
         double dC;
-
+        char pcC[STR_LENGTH];
         cout << "Saisissez une valeur et appuyez sur entree :" << endl;
-        cin >> dC;
+        cin >> pcC;
+		dC = atof(pcC);
 		
         if (dC == 0) {
-            cout << "La valeur entree est 0, la division sera impossible. " << endl;
+            cout << "La valeur entree est 0 ou non numerique, les operations sont impossibles a realiser. " << endl;
             while (dC == 0) {
-                cout << "Veuillez entrer une valeur valide pour la division :" << endl;
-                cin >> dC;
+                cout << "Veuillez entrer une valeur valide pour les operations :" << endl;
+                cin >> pcC;
+				dC = atof(pcC);
             }
         }
         
