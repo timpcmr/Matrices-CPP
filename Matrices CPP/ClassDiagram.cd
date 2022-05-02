@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CException">
+    <Position X="5.75" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAIAAAIAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>CException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cfichier">
+    <Position X="11.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAgAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CFichier.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMatrices&lt;MType&gt;">
+    <Position X="4.25" Y="5" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAKAEAAAAACAAAAEAgAAAABIACAACAAgAAAAABA=</HashCode>
+      <FileName>CMatrices.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
