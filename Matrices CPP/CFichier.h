@@ -50,9 +50,9 @@ public:
 	**** Entrées : char* pcChaine																				   ****
 	**** Nécessite :																		  					   ****
 	**** Sorties :																								   ****
-	**** Entraîne : Supprime les tabulations ou les espaces d'une chaine de caractère pcChaine passée en paramètre ****
+	**** Entraîne : Supprime un charactère c d'une chaine de caractère pcChaine passée en paramètre				   ****
 	******************************************************************************************************************/
-	static void FICSupp_Tab_Espace(char* pcChaine);
+	static void FICSupp_char(char* pcChaine, const char cCharactere);
 };
 
 #endif

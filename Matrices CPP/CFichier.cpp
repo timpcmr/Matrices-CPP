@@ -30,7 +30,8 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 		do
 		{
 			fichier.getline(pcLigne, STR_LENGTH);
-			FICSupp_Tab_Espace(pcLigne);
+			FICSupp_char(pcLigne, ' ');
+			FICSupp_char(pcLigne, '\t');
 		} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 		char *pcToken = strtok(pcLigne, "=");
@@ -48,7 +49,8 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			do
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_Tab_Espace(pcLigne);
+				FICSupp_char(pcLigne, ' ');
+				FICSupp_char(pcLigne, '\t');
 			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			pcToken = strtok(pcLigne, "=");
@@ -58,6 +60,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 				delete[] pcLigne;
 				throw CException(EXCParserPointeurNul);
 			}
+			//On veut une dimension minimum égale à 1
 			else if (atoi(pcToken) <= 0) {
 				delete[] pcLigne;
 				throw CException(EXCDimLigneNeg);
@@ -69,7 +72,8 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			do
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_Tab_Espace(pcLigne);
+				FICSupp_char(pcLigne, ' ');
+				FICSupp_char(pcLigne, '\t');
 			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			pcToken = strtok(pcLigne, "=");
@@ -79,7 +83,8 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 				delete[] pcLigne;
 				throw CException(EXCParserPointeurNul);
 			}
-			else if (atoi(pcToken) < 0) {
+			//On veut une dimension minimum égale à 1
+			else if (atoi(pcToken) <= 0) {
 				delete[] pcLigne;
 				throw CException(EXCDimColonneNeg);
 			}
@@ -94,12 +99,12 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			do
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_Tab_Espace(pcLigne);
+				FICSupp_char(pcLigne, ' ');
+				FICSupp_char(pcLigne, '\t');
 			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			//Et on commence à récupérer les valeurs
 			
-
 			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
 				//On cherche la première/suivante ligne de valeurs non nulle
 
@@ -108,10 +113,10 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 				} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 				
 				//On teste si il y a un tab en début de ligne, si oui on le supprime et ceux 
-				//dans la ligne, sinon, on ne supprimme pas les espaces entre les valeurs
+				//dans la ligne, cette fois on ne supprime pas les espaces vu que ce sont les séparateurs de valeurs
 				
 				if (pcLigne[0] == '\t') {
-					FICSupp_Tab_Espace(pcLigne);
+					FICSupp_char(pcLigne, '\t');
 				}
 								
 				pcToken = strtok(pcLigne, " ");
@@ -145,7 +150,8 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			do
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_Tab_Espace(pcLigne);
+				FICSupp_char(pcLigne, ' ');
+				FICSupp_char(pcLigne, '\t');
 			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			if (pcLigne[0] != ']') {
@@ -191,40 +197,26 @@ char * Cfichier::FICMinuscule(char* pcChaine)
 	return pcChaine;
 }
 
+
 /******************************************************************************************************************
 **** Entrées : char* pcChaine																				   ****
 **** Nécessite :																		  					   ****
 **** Sorties :																								   ****
-**** Entraîne : Supprime les tabulations ou les espaces d'une chaine de caractère pcChaine passée en paramètre ****
+**** Entraîne : Supprime un charactère c d'une chaine de caractère pcChaine passée en paramètre				   ****
 ******************************************************************************************************************/
-void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
+void Cfichier::FICSupp_char(char* pcChaine, const char cCharactere)
 {
 	if (pcChaine == nullptr) {
 		throw CException(EXCTokenNulSuppEspace);
 	}
 	unsigned int uiboucle1, uiboucle2;
 
-	//On supprime soit les tabulations soit les espaces sinon lors du parsage des valeurs de matrices on aura une corruption de données.
-	//Traitement des espaces dans le cas ou une tabulation n'est pas en début de ligne.
-	if (pcChaine[0] != '\t') {
-		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
-			if (pcChaine[uiboucle1] == ' ') {
-				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
-					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
-				}
-				uiboucle1--;
+	for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
+		if (pcChaine[uiboucle1] == cCharactere) {
+			for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
+				pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
 			}
-		}
-	}
-
-	//Dans le cas des valeurs de matrices on a juste une tabulation au debut. On la supprime pour améliorer le traitement par les flots.
-	else {
-		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
-			if (pcChaine[uiboucle1] == '\t') {
-				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
-					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
-				}
-			}
+			uiboucle1--;
 		}
 	}
 	pcChaine[uiboucle1] = '\0';

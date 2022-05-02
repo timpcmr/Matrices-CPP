@@ -356,20 +356,20 @@ void CMatrices<MType>::MATModifierNombreLignes(const unsigned int uiLigne)
 	else {
 		//La valeur des cases ajoutées sera initialisée à la valeur par défaut du type de données
 
-		//Copie des données existantes
-		for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
+
+		for (uiBoucle1 = 0; uiBoucle1 < uiLigne; uiBoucle1++) {
 			for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
-				pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
-			}
-		}
-		//Puis on initialise les cases restées vides
-		for (uiBoucle1 = MATLireNbLignes(); uiBoucle1 < uiLigne; uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
-				pMTPtmp[uiBoucle1][uiBoucle2] = MType();
+				//Copie des données existantes
+				if (uiBoucle1 < MATLireNbLignes()) {
+					pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
+				}
+				//Ou on initialise les nouvelles cases vides
+				else {
+					pMTPtmp[uiBoucle1][uiBoucle2] = MType();
+				}
 			}
 		}
 	}
-
 	//On traite le changement de tableau de contenu:
 
 	//On désalloue l'ancien contenu
@@ -426,14 +426,15 @@ void CMatrices<MType>::MATModifierNombreColonnes(const unsigned int uiColonne)
 
 		//Copie des données existantes
 		for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
-				pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
-			}
-		}
-		//Puis on initialise les cases restées vides
-		for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
-			for (uiBoucle2 = MATLireNbColonnes(); uiBoucle2 < uiColonne; uiBoucle2++) {
-				pMTPtmp[uiBoucle1][uiBoucle2] = MType();
+			for (uiBoucle2 = 0; uiBoucle2 < uiColonne; uiBoucle2++) {
+				//Copie des données existantes
+				if (uiBoucle2 < MATLireNbColonnes()) {
+					pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
+				}
+				//Ou on initialise les nouvelles cases vides
+				else {
+					pMTPtmp[uiBoucle1][uiBoucle2] = MType();
+				}
 			}
 		}
 	}
