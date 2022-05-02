@@ -24,14 +24,20 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 		char* pcLigne = new char[STR_LENGTH];
 
 		//On récupère le type de données
+
+		//Cette boucle va etre utile pour ne pas tenir compte des lignes nulles ainsi que
+		//supprimer espaces et tabulations inutiles
 		do
 		{
 			fichier.getline(pcLigne, STR_LENGTH);
 			FICSupp_Tab_Espace(pcLigne);
-		} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+		} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+
 		char *pcToken = strtok(pcLigne, "=");
 		pcToken = strtok(NULL, "=");
+
 		if (pcToken == nullptr) {
+			//Toutes les exceptions gerent la libération de la mémoire occupée par pcLigne
 			delete[] pcLigne;
 			throw CException(EXCParserPointeurNul);
 		}
@@ -43,9 +49,11 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
+
 			if (pcToken == nullptr) {
 				delete[] pcLigne;
 				throw CException(EXCParserPointeurNul);
@@ -54,6 +62,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 				delete[] pcLigne;
 				throw CException(EXCDimLigneNeg);
 			}
+
 			uiparsedLignes = (unsigned int)(atoi(pcToken));
 
 			//On récupère le nombre de colonnes
@@ -61,9 +70,11 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
+
 			if (pcToken == nullptr) {
 				delete[] pcLigne;
 				throw CException(EXCParserPointeurNul);
@@ -72,6 +83,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 				delete[] pcLigne;
 				throw CException(EXCDimColonneNeg);
 			}
+
 			uiparsedColonnes = (unsigned int)(atoi(pcToken));
 
 			//Instanciation de la matrice de retour aux bonnes dimensions
@@ -83,7 +95,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			//Et on commence à récupérer les valeurs
 			
@@ -93,7 +105,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 
 				do {
 					fichier.getline(pcLigne, STR_LENGTH);
-				} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+				} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 				
 				//On teste si il y a un tab en début de ligne, si oui on le supprime et ceux 
 				//dans la ligne, sinon, on ne supprimme pas les espaces entre les valeurs
@@ -103,20 +115,26 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 				}
 								
 				pcToken = strtok(pcLigne, " ");
+
 				if (pcToken[0] == ']') {
 					delete[] pcLigne;
 					throw CException(EXCLigneDimSup);
 				}
+
 				MATretour.MATModifierCase(uiboucle1, 0, atof(pcToken));
+
 				for (uiboucle2 = 1; uiboucle2 < uiparsedColonnes; uiboucle2++) {
 					pcToken = strtok(NULL, " ");
+
 					if (pcToken == nullptr) {
 						delete[] pcLigne;
 						throw CException(EXCColonneDimSup);
 					}
+
 					MATretour.MATModifierCase(uiboucle1, uiboucle2, atof(pcToken));
 				}
 				pcToken = strtok(NULL, " ");
+
 				if (pcToken != nullptr) {
 					delete[] pcLigne;
 					throw CException(EXCColonneDimInf);
@@ -128,7 +146,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 			{
 				fichier.getline(pcLigne, STR_LENGTH);
 				FICSupp_Tab_Espace(pcLigne);
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\r' || pcLigne[0] == '\0');
+			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 
 			if (pcLigne[0] != ']') {
 				delete[] pcLigne;
@@ -141,6 +159,7 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 			delete[] pcLigne;
 			throw CException(EXCErrTypeMat);
 		}
+
 		delete[] pcLigne;
 	}
 	else {
@@ -149,9 +168,8 @@ CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 	//Cas impossible mais nécéssaire à la compilation
 
 	CMatrices<double> MATretour;
-	return MATretour;
-	
 
+	return MATretour;
 }
 
 /***********************************************************************************************************************
