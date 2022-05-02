@@ -10,7 +10,12 @@
 
 using namespace std;
 
-
+/******************************************************************************************************************
+**** Entrées : argc : int, argv : char **					    											   ****
+**** Nécessite : Arguments passés en paramètre											  					   ****
+**** Sorties :	int : Code de sortie de programme															   ****
+**** Entraîne :  L'exécution de l'algorithme principal du programme                                            ****
+******************************************************************************************************************/
 int main(int argc, char* argv[])
 {
     //Si au moins un chemin de fichier est donne
@@ -23,7 +28,7 @@ int main(int argc, char* argv[])
 
         for (iBoucleLire = 0; iBoucleLire < argc - 1; iBoucleLire++) {
             try {
-                pMATmatrices[iBoucleLire] = Cfichier::FICLireMatrice(argv[iBoucleLire + 1]);
+                pMATmatrices[iBoucleLire] = Cfichier::FICLireFichier(argv[iBoucleLire + 1]);
             }
             catch (CException EXCException) {
 

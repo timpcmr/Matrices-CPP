@@ -10,13 +10,13 @@ using namespace std;
 **** Sorties :	CMatrice MATretour																   ****
 **** Entraîne : Renvoie la matrice du fichier texte dont le chemin pcChemin est passé en paramètre ****
 ******************************************************************************************************/
-CMatrices<double> Cfichier::FICLireMatrice(char* pcChemin)
+CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
 {
 	if (pcChemin == nullptr) {
 		throw CException(EXCCheminNul);
 	}
 	ifstream fichier(pcChemin);
-	//Exceptions à rajouter
+
 	unsigned int uiparsedLignes, uiparsedColonnes, uiboucle1, uiboucle2;
 
 	if (fichier.is_open()) {

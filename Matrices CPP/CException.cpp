@@ -1,10 +1,23 @@
 #include "CException.h"
 
+
+/***************************************************************************
+**** Entrées :                           							    ****
+**** Nécessite :                                                        ****
+**** Sorties :				                                            ****
+**** Entraîne : Construit un objet exception avec une valeur 0	        ****
+****************************************************************************/
 CException::CException()
 {
 	iEXCValeur = EXCNonSpecifiee;
 }
 
+/***************************************************************************
+**** Entrées : iVal : int                          	                    ****
+**** Nécessite :                                                        ****
+**** Sorties :				                                            ****
+**** Entraîne : Construit un objet exception avec une valeur iVal       ****
+****************************************************************************/
 CException::CException(int iVal)
 {
 	iEXCValeur = iVal;

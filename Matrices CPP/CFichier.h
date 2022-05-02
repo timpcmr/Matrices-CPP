@@ -27,9 +27,31 @@
 class Cfichier {
 public:
 	//Parseur
-	static CMatrices<double> FICLireMatrice(char* pcChemin);
+
+	/******************************************************************************************************
+	**** Entrées : char* pcChemin																	   ****
+	**** Nécessite :																		  	       ****
+	**** Sorties :	CMatrice MATretour																   ****
+	**** Entraîne : Renvoie la matrice du fichier texte dont le chemin pcChemin est passé en paramètre ****
+	******************************************************************************************************/
+	static CMatrices<double> FICLireFichier(char* pcChemin);
+
 	//Fonctions de handle mauvaise mise en forme
+
+	/***********************************************************************************************************************
+	**** Entrées : char* pcChaine																					    ****
+	**** Nécessite :																		  							****
+	**** Sorties :	char* pcChaine																						****
+	**** Entraîne : Renvoie la chaine pcChaine passée en paramètre et dont toutes les lettres sont passées en minuscule ****
+	***********************************************************************************************************************/
 	static char * FICMinuscule(char* pcChaine);
+
+	/******************************************************************************************************************
+	**** Entrées : char* pcChaine																				   ****
+	**** Nécessite :																		  					   ****
+	**** Sorties :																								   ****
+	**** Entraîne : Supprime les tabulations ou les espaces d'une chaine de caractère pcChaine passée en paramètre ****
+	******************************************************************************************************************/
 	static void FICSupp_Tab_Espace(char* pcChaine);
 };
 
