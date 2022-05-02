@@ -325,7 +325,7 @@ void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColo
 **** Entraîne : Modification de l'attribut MATNbLigne de la matrice actuelle	 ****
 *************************************************************************************/
 template<class MType>
-inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
+void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
 {
 	if (uiLigne < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -393,7 +393,7 @@ inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
 **** Entraîne : Modification de l'attribut MATNbColonnes de la matrice actuelle	 ****
 *************************************************************************************/
 template<class MType>
-inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
+void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
 {
 	if (uiColonne < 0) {
 		throw CException(EXCMATDimColonneNeg);
@@ -462,7 +462,7 @@ inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
 **** Entraîne : Renvoie une matrice résultant de l'addition de 2 matrices		 ****
 *************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) const
+CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) const
 {
 	if (MATLireNbLignes() != MATadd.MATLireNbLignes()) {
 		throw CException(EXCMATDimLigne);
@@ -495,7 +495,7 @@ inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) con
 **** Entraîne : Renvoie une matrice résultant de la différence entre 2 matrices	 ****
 *************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) const
+CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) const
 {
 	if (MATLireNbLignes() != MATdiff.MATLireNbLignes()) {
 		throw CException(EXCMATDimLigne);
@@ -528,7 +528,7 @@ inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) co
 **** Entraîne : Renvoie une matrice résultant de la multiplication de 2 matrices ****
 *************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) const
+CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) const
 {
 	if(MATLireNbColonnes() != MATmult.MATLireNbLignes()) {
 		throw CException(EXCDimMatMult);
@@ -563,7 +563,7 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 **** Entraîne : Renvoie une matrice résultant de la multiplication entre la matrice actuelle et la constante dComposante ****
 ****************************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
+CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -603,7 +603,7 @@ inline CMatrices<MType> operator*(const double dComposante, const CMatrices<MTyp
 **** Entraîne : Renvoie une matrice résultant de la division de la matrice actuelle par la constante dComposante ****
 ********************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) const
+CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -633,7 +633,7 @@ inline CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) co
 **** Entraîne :	Affecte les valeurs de la matrice MATegal à la matrice actuelle  ****
 ************************************************************************************/
 template<class MType>
-inline CMatrices<MType> & CMatrices<MType>::operator=(CMatrices<MType> MATegal)
+CMatrices<MType> & CMatrices<MType>::operator=(CMatrices<MType> MATegal)
 {
 	unsigned int uiBoucle1, uiBoucle2;
 
