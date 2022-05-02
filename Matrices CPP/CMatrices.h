@@ -4,7 +4,6 @@
 #pragma warning(disable : 6011)
 #pragma warning(disable : 6386)
 
-
 #include <iostream>
 #include <cstdio>
 #include <typeinfo>
