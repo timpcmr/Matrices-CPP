@@ -5,11 +5,11 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <cctype>
 
-#define STR_LENGTH 256
+#define STR_LENGTH 1024
 
 #define EXCCheminNul 1
 #define EXCFichierNonOuvert 2
@@ -34,7 +34,7 @@ public:
 	**** Sorties :	CMatrice MATretour																   ****
 	**** Entraîne : Renvoie la matrice du fichier texte dont le chemin pcChemin est passé en paramètre ****
 	******************************************************************************************************/
-	static CMatrices<double> FICLireFichier(char* pcChemin);
+	static CMatrices<double> FICLireFichier(const char* pcChemin);
 
 	//Fonctions de handle mauvaise mise en forme
 

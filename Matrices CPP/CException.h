@@ -27,7 +27,7 @@ public:
 	**** Sorties :				                                            ****
 	**** Entraîne : Construit un objet exception avec une valeur iVal       ****
 	****************************************************************************/
-	CException(int iVal);
+	CException(const int iVal);
 
 	//Accesseur
 
@@ -47,7 +47,7 @@ public:
 	**** Sorties :	                                         	            ****
 	**** Entraîne : Modifie la valeur de l'exception                        ****
 	****************************************************************************/
-	void EXCChangerValeur(int iparam);
+	void EXCChangerValeur(const int iparam);
 
 };
 #endif

@@ -44,7 +44,7 @@ public:
 	**** Sorties : CMatrices														****
 	**** Entraîne : La construction d'un objet CMatrices 1x1						****
 	************************************************************************************/
-	CMatrices<MType>(unsigned int uiParam1, unsigned int uiParam2);
+	CMatrices<MType>(const unsigned int uiParam1, const unsigned int uiParam2);
 
 
 	/************************************************************************************
@@ -87,7 +87,7 @@ public:
 	**** Sorties : MType : pMTPMATContenu[uiLigne][uiColonne]						 ****
 	**** Entraîne : Le retour de l'élément de la matrice souhaité					 ****
 	*************************************************************************************/
-	MType MATLireElement(unsigned int uiLigne, unsigned int uiColonne)const;
+	MType MATLireElement(const unsigned int uiLigne, const unsigned int uiColonne)const;
 	
 	//Modifieurs
 
@@ -97,7 +97,7 @@ public:
 	**** Sorties :																	 ****
 	**** Entraîne : Le changement de valeur de l'élément de la matrice souhaité		 ****
 	*************************************************************************************/
-	void MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MTPparam);
+	void MATModifierCase(const unsigned int uiLigne, const unsigned int uiColonne, MType MTPparam);
 
 	/************************************************************************************
 	**** Entrées : unsigned int uiLigne								                 ****
@@ -105,7 +105,7 @@ public:
 	**** Sorties :																	 ****
 	**** Entraîne : Modification de l'attribut MATNbLigne de la matrice actuelle	 ****
 	*************************************************************************************/
-	void MATModifierNombreLignes(unsigned int uiLigne);
+	void MATModifierNombreLignes(const unsigned int uiLigne);
 
 	/************************************************************************************
 	**** Entrées : unsigned int uiColonne								             ****
@@ -113,37 +113,37 @@ public:
 	**** Sorties :																	 ****
 	**** Entraîne : Modification de l'attribut MATNbColonnes de la matrice actuelle	 ****
 	*************************************************************************************/
-	void MATModifierNombreColonnes(unsigned int uiColonne);
+	void MATModifierNombreColonnes(const unsigned int uiColonne);
 	
 	//Surcharges d'opérateurs
 
-	/************************************************************************************
-	**** Entrées : CMatrice MATadd									                 ****
-	**** Nécessite :															     ****
-	**** Sorties :	CMatrice MATretour												 ****
-	**** Entraîne : Renvoie une matrice résultant de l'addition de 2 matrices		 ****
-	*************************************************************************************/
-	CMatrices<MType> operator+(CMatrices<MType> MATadd)const;
+	/****************************************************************************************************************************
+	**** Entrées : CMatrice MATadd																							 ****
+	**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+	**** Sorties :	CMatrice MATretour																						 ****
+	**** Entraîne : Renvoie une matrice résultant de l'addition de 2 matrices												 ****
+	****************************************************************************************************************************/
+	CMatrices<MType> operator+(const CMatrices<MType> MATadd)const;
 
-	/************************************************************************************
-	**** Entrées : CMatrice MATdif									                 ****
-	**** Nécessite :															     ****
-	**** Sorties :	CMatrice MATretour												 ****
-	**** Entraîne : Renvoie une matrice résultant de la différence entre 2 matrices	 ****
-	*************************************************************************************/
-	CMatrices<MType> operator-(CMatrices<MType> MATdiff)const;
+	/****************************************************************************************************************************
+	**** Entrées : CMatrice MATdiff																							 ****
+	**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+	**** Sorties :	CMatrice MATretour																						 ****
+	**** Entraîne : Renvoie une matrice résultant de la soustraction de 2 matrices											 ****
+	****************************************************************************************************************************/
+	CMatrices<MType> operator-(const CMatrices<MType> MATdiff)const;
 
-	/************************************************************************************
-	**** Entrées : CMatrice MATmult											         ****
-	**** Nécessite :															     ****
-	**** Sorties :	CMatrice MATretour												 ****
-	**** Entraîne : Renvoie une matrice résultant de la multiplication de 2 matrices ****
-	*************************************************************************************/
-	CMatrices<MType> operator*(CMatrices<MType> MATmult)const;
+	/****************************************************************************************************************************
+	**** Entrées : CMatrice MATmult																							 ****
+	**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+	**** Sorties :	CMatrice MATretour																						 ****
+	**** Entraîne : Renvoie une matrice résultant de la multiplication de 2 matrices										 ****
+	****************************************************************************************************************************/
+	CMatrices<MType> operator*(const CMatrices<MType> MATmult)const;
 
 	/****************************************************************************************************************************
 	**** Entrées : const double dComposante																				     ****
-	**** Nécessite :																									     ****
+	**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
 	**** Sorties :	CMatrice MATretour																						 ****
 	**** Entraîne : Renvoie une matrice résultant de la multiplication entre la matrice actuelle et la constante dComposante ****
 	****************************************************************************************************************************/
@@ -151,7 +151,7 @@ public:
 
 	/********************************************************************************************************************
 	**** Entrées : const double dComposante																			 ****
-	**** Nécessite :																								 ****
+	**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char	 ****
 	**** Sorties :	CMatrice MATretour																				 ****
 	**** Entraîne : Renvoie une matrice résultant de la division de la matrice actuelle par la constante dComposante ****
 	********************************************************************************************************************/
@@ -163,7 +163,7 @@ public:
 	**** Sorties :	CMatrice* this													 ****
 	**** Entraîne :	Affecte les valeurs de la matrice MATegal à la matrice actuelle  ****
 	************************************************************************************/
-	CMatrices<MType> & operator=(CMatrices<MType> MATegal);
+	CMatrices<MType> & operator=(const CMatrices<MType> MATegal);
 
 	//Méthodes
 
@@ -173,7 +173,7 @@ public:
 	**** Sorties :	CMatrice MATretour												 ****
 	**** Entraîne : Renvoie la transposée de la matrice MATMatrice					 ****
 	************************************************************************************/
-	CMatrices<MType> MATTransposer(CMatrices<MType> MATMatrice);
+	CMatrices<MType> MATTransposer();
 
 	/************************************************************************************
 	**** Entrées :															         ****
@@ -191,7 +191,7 @@ public:
 **** Entraîne : La construction d'un objet CMatrices uiParam1 * uiParam2		 ****
 *************************************************************************************/
 template<class MType>
-CMatrices<MType>::CMatrices(unsigned int uiParam1, unsigned int uiParam2)
+CMatrices<MType>::CMatrices(const unsigned int uiParam1, const unsigned int uiParam2)
 {
 	unsigned int uiboucle1, uiboucle2;
 
@@ -217,7 +217,7 @@ CMatrices<MType>::CMatrices(unsigned int uiParam1, unsigned int uiParam2)
 **** Entraîne : La construction d'un objet CMatrices 1x1						****
 ************************************************************************************/
 template<class MType>
-inline CMatrices<MType>::CMatrices()
+CMatrices<MType>::CMatrices()
 {
 	uiMATNbLignes = 1;
 	uiMATNbColonnes = 1;
@@ -277,7 +277,7 @@ CMatrices<MType>::~CMatrices()
 **** Entraîne : Le retour du nombre de lignes de la matrice						 ****
 *************************************************************************************/
 template<class MType>
-inline unsigned int CMatrices<MType>::MATLireNbLignes()const
+unsigned int CMatrices<MType>::MATLireNbLignes()const
 {
 	return uiMATNbLignes;
 }
@@ -289,7 +289,7 @@ inline unsigned int CMatrices<MType>::MATLireNbLignes()const
 **** Entraîne : Le retour du nombre de colonnes de la matrice					 ****
 *************************************************************************************/
 template<class MType>
-inline unsigned int CMatrices<MType>::MATLireNbColonnes()const
+unsigned int CMatrices<MType>::MATLireNbColonnes()const
 {
 	return uiMATNbColonnes;
 }
@@ -301,7 +301,7 @@ inline unsigned int CMatrices<MType>::MATLireNbColonnes()const
 **** Entraîne : Le retour de l'élément de la matrice souhaité					 ****
 *************************************************************************************/
 template<class MType>
-MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColonne)const
+MType CMatrices<MType>::MATLireElement(const unsigned int uiLigne, const unsigned int uiColonne)const
 {
 	return pMTPMATContenu[uiLigne][uiColonne];
 }
@@ -313,7 +313,7 @@ MType CMatrices<MType>::MATLireElement(unsigned int uiLigne, unsigned int uiColo
 **** Entraîne : Le changement de valeur de l'élément de la matrice souhaité		 ****
 *************************************************************************************/
 template<class MType>
-void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColonne, MType MATParam)
+void CMatrices<MType>::MATModifierCase(const unsigned int uiLigne, const unsigned int uiColonne, MType MATParam)
 {
 	pMTPMATContenu[uiLigne][uiColonne] = MATParam;
 }
@@ -325,7 +325,7 @@ void CMatrices<MType>::MATModifierCase(unsigned int uiLigne, unsigned int uiColo
 **** Entraîne : Modification de l'attribut MATNbLigne de la matrice actuelle	 ****
 *************************************************************************************/
 template<class MType>
-inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
+void CMatrices<MType>::MATModifierNombreLignes(const unsigned int uiLigne)
 {
 	if (uiLigne < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -393,7 +393,7 @@ inline void CMatrices<MType>::MATModifierNombreLignes(unsigned int uiLigne)
 **** Entraîne : Modification de l'attribut MATNbColonnes de la matrice actuelle	 ****
 *************************************************************************************/
 template<class MType>
-inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
+void CMatrices<MType>::MATModifierNombreColonnes(const unsigned int uiColonne)
 {
 	if (uiColonne < 0) {
 		throw CException(EXCMATDimColonneNeg);
@@ -455,14 +455,14 @@ inline void CMatrices<MType>::MATModifierNombreColonnes(unsigned int uiColonne)
 
 }
 
-/************************************************************************************
-**** Entrées : CMatrice MATadd									                 ****
-**** Nécessite :															     ****
-**** Sorties :	CMatrice MATretour												 ****
-**** Entraîne : Renvoie une matrice résultant de l'addition de 2 matrices		 ****
-*************************************************************************************/
+/****************************************************************************************************************************
+**** Entrées : CMatrice MATadd																							 ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+**** Sorties :	CMatrice MATretour																						 ****
+**** Entraîne : Renvoie une matrice résultant de l'addition de 2 matrices												 ****
+****************************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) const
+CMatrices<MType> CMatrices<MType>::operator+(const CMatrices<MType> MATadd) const
 {
 	if (MATLireNbLignes() != MATadd.MATLireNbLignes()) {
 		throw CException(EXCMATDimLigne);
@@ -488,14 +488,14 @@ inline CMatrices<MType> CMatrices<MType>::operator+(CMatrices<MType> MATadd) con
 	return MATretour;
 }
 
-/************************************************************************************
-**** Entrées : CMatrice MATdif									                 ****
-**** Nécessite :															     ****
-**** Sorties :	CMatrice MATretour												 ****
-**** Entraîne : Renvoie une matrice résultant de la différence entre 2 matrices	 ****
-*************************************************************************************/
+/****************************************************************************************************************************
+**** Entrées : CMatrice MATdiff																							 ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+**** Sorties :	CMatrice MATretour																						 ****
+**** Entraîne : Renvoie une matrice résultant de la soustraction de 2 matrices											 ****
+****************************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) const
+CMatrices<MType> CMatrices<MType>::operator-(const CMatrices<MType> MATdiff) const
 {
 	if (MATLireNbLignes() != MATdiff.MATLireNbLignes()) {
 		throw CException(EXCMATDimLigne);
@@ -521,14 +521,14 @@ inline CMatrices<MType> CMatrices<MType>::operator-(CMatrices<MType> MATdiff) co
 	return MATretour;
 }
 
-/************************************************************************************
-**** Entrées : CMatrice MATmult											         ****
-**** Nécessite :															     ****
-**** Sorties :	CMatrice MATretour												 ****
-**** Entraîne : Renvoie une matrice résultant de la multiplication de 2 matrices ****
-*************************************************************************************/
+/****************************************************************************************************************************
+**** Entrées : CMatrice MATmult																							 ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
+**** Sorties :	CMatrice MATretour																						 ****
+**** Entraîne : Renvoie une matrice résultant de la multiplication de 2 matrices										 ****
+****************************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) const
+CMatrices<MType> CMatrices<MType>::operator*(const CMatrices<MType> MATmult) const
 {
 	if(MATLireNbColonnes() != MATmult.MATLireNbLignes()) {
 		throw CException(EXCDimMatMult);
@@ -558,12 +558,12 @@ inline CMatrices<MType> CMatrices<MType>::operator*(CMatrices<MType> MATmult) co
 
 /****************************************************************************************************************************
 **** Entrées : const double dComposante																				     ****
-**** Nécessite :																									     ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
 **** Sorties :	CMatrice MATretour																						 ****
 **** Entraîne : Renvoie une matrice résultant de la multiplication entre la matrice actuelle et la constante dComposante ****
 ****************************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
+CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -583,10 +583,11 @@ inline CMatrices<MType> CMatrices<MType>::operator*(const double dComposante) co
 	return MATretour;
 }
 
-//Surcharge déclarée hors de la classse
+//Surcharge déclarée hors de la classe
+
 /****************************************************************************************************************************
 **** Entrées : const double dComposante, const CMatrice MATMult															 ****
-**** Nécessite :																										 ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char			 ****
 **** Sorties :	CMatrice MATretour																						 ****
 **** Entraîne : Renvoie une matrice résultant de la multiplication entre la constante dComposante et la matrice MATMult	 ****
 ****************************************************************************************************************************/
@@ -598,12 +599,12 @@ inline CMatrices<MType> operator*(const double dComposante, const CMatrices<MTyp
 
 /********************************************************************************************************************
 **** Entrées : const double dComposante																			 ****
-**** Nécessite :																								 ****
+**** Nécessite : MType est type de base, un objet avec la surcharge adaptée ou différent d'un pointeur ou char	 ****
 **** Sorties :	CMatrice MATretour																				 ****
 **** Entraîne : Renvoie une matrice résultant de la division de la matrice actuelle par la constante dComposante ****
 ********************************************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) const
+CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) const
 {
 	if (MATLireNbLignes() < 0) {
 		throw CException(EXCMATDimLigneNeg);
@@ -629,11 +630,11 @@ inline CMatrices<MType> CMatrices<MType>::operator/(const double dComposante) co
 /************************************************************************************
 **** Entrées : CMatrice MATegal											         ****
 **** Nécessite :															     ****
-**** Sorties :	CMatrice* this													 ****
+**** Sorties :	CMatrice this													 ****
 **** Entraîne :	Affecte les valeurs de la matrice MATegal à la matrice actuelle  ****
 ************************************************************************************/
 template<class MType>
-inline CMatrices<MType> & CMatrices<MType>::operator=(CMatrices<MType> MATegal)
+CMatrices<MType> & CMatrices<MType>::operator=(const CMatrices<MType> MATegal)
 {
 	unsigned int uiBoucle1, uiBoucle2;
 
@@ -660,16 +661,15 @@ inline CMatrices<MType> & CMatrices<MType>::operator=(CMatrices<MType> MATegal)
 **** Entraîne : Renvoie la transposée de la matrice MATMatrice					 ****
 ************************************************************************************/
 template<class MType>
-inline CMatrices<MType> CMatrices<MType>::MATTransposer(CMatrices<MType> MATMatrice)
+CMatrices<MType> CMatrices<MType>::MATTransposer()
 {
-	CMatrices<MType> MATretour(MATMatrice.MATLireNbColonnes(), MATMatrice.MATLireNbLignes());
+	CMatrices<MType> MATretour(MATLireNbColonnes(), MATLireNbLignes());
 	unsigned int uiBoucle1, uiBoucle2;
-	for (uiBoucle1 = 0; uiBoucle1 < MATretour.MATLireNbLignes(); uiBoucle1++) {
-		for (uiBoucle2 = 0; uiBoucle2 < MATretour.MATLireNbColonnes(); uiBoucle2++) {
-			MATretour.MATModifierCase(uiBoucle1, uiBoucle2, MATMatrice.MATLireElement(uiBoucle2, uiBoucle1));
+	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
+		for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
+			MATretour.MATModifierCase(uiBoucle1, uiBoucle2, MATLireElement(uiBoucle2, uiBoucle1));
 		}
 	}
-
 
 	return MATretour;
 }

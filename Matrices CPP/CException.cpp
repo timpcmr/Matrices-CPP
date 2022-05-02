@@ -18,7 +18,7 @@ CException::CException()
 **** Sorties :				                                            ****
 **** Entraîne : Construit un objet exception avec une valeur iVal       ****
 ****************************************************************************/
-CException::CException(int iVal)
+CException::CException(const int iVal)
 {
 	iEXCValeur = iVal;
 }
@@ -41,7 +41,7 @@ int CException::EXCLireErreur()
 **** Sorties :	                                         	            ****
 **** Entraîne : Modifie la valeur de l'exception                        ****
 ****************************************************************************/
-void CException::EXCChangerValeur(int iParam)
+void CException::EXCChangerValeur(const int iParam)
 {
 	iEXCValeur = iParam;
 }

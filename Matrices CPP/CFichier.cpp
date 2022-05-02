@@ -10,7 +10,7 @@ using namespace std;
 **** Sorties :	CMatrice MATretour																   ****
 **** Entraîne : Renvoie la matrice du fichier texte dont le chemin pcChemin est passé en paramètre ****
 ******************************************************************************************************/
-CMatrices<double> Cfichier::FICLireFichier(char* pcChemin)
+CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 {
 	if (pcChemin == nullptr) {
 		throw CException(EXCCheminNul);
@@ -202,27 +202,28 @@ void Cfichier::FICSupp_Tab_Espace(char* pcChaine)
 	if (pcChaine == nullptr) {
 		throw CException(EXCTokenNulSuppEspace);
 	}
-	unsigned int uiboucle1 = 0, uiboucle2;
+	unsigned int uiboucle1, uiboucle2;
 
 	//On supprime soit les tabulations soit les espaces sinon lors du parsage des valeurs de matrices on aura une corruption de données.
-	//Dans le cas des valeurs de matrices on a juste une tabulation au debut. On la supprime pour améliorer le traitement par les flots.
-	if (pcChaine[0] == '\t') {
-		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
-			if (pcChaine[uiboucle1] == '\t') {
-				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
-					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
-				}
-			}
-		}
-	}
 	//Traitement des espaces dans le cas ou une tabulation n'est pas en début de ligne.
-	else {
+	if (pcChaine[0] != '\t') {
 		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
 			if (pcChaine[uiboucle1] == ' ') {
 				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
 					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
 				}
 				uiboucle1--;
+			}
+		}
+	}
+
+	//Dans le cas des valeurs de matrices on a juste une tabulation au debut. On la supprime pour améliorer le traitement par les flots.
+	else {
+		for (uiboucle1 = 0; pcChaine[uiboucle1] != '\0'; uiboucle1++) {
+			if (pcChaine[uiboucle1] == '\t') {
+				for (uiboucle2 = uiboucle1; pcChaine[uiboucle2] != '\0'; uiboucle2++) {
+					pcChaine[uiboucle2] = pcChaine[uiboucle2 + 1];
+				}
 			}
 		}
 	}
