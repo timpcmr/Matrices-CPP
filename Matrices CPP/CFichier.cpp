@@ -162,7 +162,6 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 ***********************************************************************************************************************/
 void Cfichier::FICLigneSuivante(char* pcLigne, ifstream& fichier) {
 
-	unsigned int uiNbMaxBoucles = 100;
 	unsigned int uiBoucle = 0;
 
 	if (pcLigne == nullptr) {
@@ -178,7 +177,7 @@ void Cfichier::FICLigneSuivante(char* pcLigne, ifstream& fichier) {
 		FICSupp_char(pcLigne, ' ');
 		FICSupp_char(pcLigne, '\t');
 		uiBoucle++;
-		if (uiBoucle == uiNbMaxBoucles) {
+		if (uiBoucle == MAX_LOOPING) {
 			throw CException(EXCBoucleInfinie);
 		}
 	} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');

@@ -10,7 +10,7 @@
 #include <cctype>
 
 #define STR_LENGTH 1024
-#define MAX_LOOPING 1000
+#define MAX_LOOPING 10000
 
 #define EXCCheminNul 1
 #define EXCFichierNonOuvert 2
