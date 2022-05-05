@@ -75,6 +75,12 @@ int main(int argc, char* argv[])
                 else if (EXCException.EXCLireErreur() == EXCTokenNulSuppEspace) {
                     cout << "Erreur interne : L'argument passe a la fonction FICSupp_Tab_Espace est nul lors de l'utilisation du fichier  " << argv[iBoucleLire + 1] << " !" << endl;
                 }
+                else if (EXCException.EXCLireErreur() == EXCBoucleInfinie) {
+                    cout << "Erreur interne : Boucle infinie declenchee : Fichier incomplet ou manque du charactere ']' en fin de fichier!" << endl;
+                }
+                else if (EXCException.EXCLireErreur() == EXCLigneNulle) {
+                    cout << "Erreur interne : Aucune ligne passee en parametre de FICLigneSuivante !" << endl;
+                }
 
                 //Gestion fuites memoires
                 delete[] pMATmatrices;
@@ -193,10 +199,10 @@ int main(int argc, char* argv[])
                     cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[1] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle + 1] << "!" << endl;
                 }
-                else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
+                else if (EXCCexception.EXCLireErreur() == EXCMATDimColonne) {
+                    cout << "La matrice du fichier " << argv[1] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle + 1] << "!" << endl;
                 }
 
                 //Gestion memoire
@@ -236,10 +242,10 @@ int main(int argc, char* argv[])
                     cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[1] << " a un nombre de lignes different de la matrice du fichier " << argv[iBoucle + 1] << "!" << endl;
                 }
                 else if (EXCCexception.EXCLireErreur() == EXCMATDimLigne) {
-                    cout << "La matrice du fichier " << argv[0] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle] << "!" << endl;
+                    cout << "La matrice du fichier " << argv[1] << " a un nombre de colonnes different de la matrice du fichier " << argv[iBoucle + 1] << "!" << endl;
                 }
 
                 //Gestion memoire

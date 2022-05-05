@@ -10,6 +10,7 @@
 #include <cctype>
 
 #define STR_LENGTH 1024
+#define MAX_LOOPING 1000
 
 #define EXCCheminNul 1
 #define EXCFichierNonOuvert 2
@@ -23,6 +24,9 @@
 #define EXCColonneDimInf 10
 #define EXCLigneDimSup 11
 #define EXCLigneDimInf 12
+#define EXCBoucleInfinie 21
+#define EXCLigneNulle 22
+
 
 class Cfichier {
 public:

@@ -86,8 +86,11 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			for (uiboucle1 = 0; uiboucle1 < uiparsedLignes; uiboucle1++) {
 				//On cherche la première/suivante ligne de valeurs non nulle
 
+				unsigned int uiCompteur = 0;
 				do {
 					fichier.getline(pcLigne, STR_LENGTH);
+					uiCompteur++;
+					if (uiCompteur == MAX_LOOPING) throw CException(EXCBoucleInfinie);
 				} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 				
 				//On teste si il y a un tab en début de ligne, si oui on le supprime et ceux 
@@ -158,11 +161,26 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 **** Entraîne : Renvoie la chaine pcChaine passée en paramètre et dont tous les tabh et espaces sont supprimés	    ****
 ***********************************************************************************************************************/
 void Cfichier::FICLigneSuivante(char* pcLigne, ifstream& fichier) {
+
+	unsigned int uiNbMaxBoucles = 100;
+	unsigned int uiBoucle = 0;
+
+	if (pcLigne == nullptr) {
+		throw CException(EXCLigneNulle);
+	}
+	if (!fichier) {
+		throw CException(EXCFichierNonOuvert);
+	}
+
 	do
 	{
 		fichier.getline(pcLigne, STR_LENGTH);
 		FICSupp_char(pcLigne, ' ');
 		FICSupp_char(pcLigne, '\t');
+		uiBoucle++;
+		if (uiBoucle == uiNbMaxBoucles) {
+			throw CException(EXCBoucleInfinie);
+		}
 	} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
 }
 
