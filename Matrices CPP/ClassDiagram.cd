@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CException">
-    <Position X="5.75" Y="2.25" Width="2.5" />
+    <Position X="3" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAAIAAAIAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>CException.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Cfichier">
-    <Position X="11.5" Y="2.5" Width="2" />
+    <Position X="0.5" Y="5.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAgAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgBAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>CFichier.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMatrices&lt;MType&gt;">
-    <Position X="4.25" Y="5" Width="6" />
+    <Position X="1.25" Y="1" Width="6" />
     <TypeIdentifier>
-      <HashCode>AAIQAAKAEAAAAACAAAAEAgAAAABIACAACAAgAAAAABA=</HashCode>
+      <HashCode>ABIQAAIAEAAAAACAAAAEAAAAAABIACAACAAgAAAAABA=</HashCode>
       <FileName>CMatrices.h</FileName>
     </TypeIdentifier>
   </Class>
