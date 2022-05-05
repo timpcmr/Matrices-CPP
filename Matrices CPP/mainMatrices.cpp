@@ -280,7 +280,7 @@ int main(int argc, char* argv[])
                         cout << "La matrice du fichier " << argv[iBoucle + 1] << " a un nombre de lignes negatif !" << endl;
                     }
                     else if (EXCCexception.EXCLireErreur() == EXCDimMatMult) {
-                        cout << "La matrice du fichier " << argv[iBoucle - 1] << " a des dimensions incompatibles avec la matrice du fichier " << argv[iBoucle] << " pour les faire se multiplier !" << endl;
+                        cout << "La matrice du fichier " << argv[iBoucle] << " a des dimensions incompatibles avec la matrice du fichier " << argv[iBoucle + 1] << " pour les faire se multiplier !" << endl;
                     }
 
                     //Gestion memoire
