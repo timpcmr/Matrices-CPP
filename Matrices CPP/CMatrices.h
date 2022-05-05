@@ -99,21 +99,14 @@ public:
 	void MATModifierCase(const unsigned int uiLigne, const unsigned int uiColonne, MType MTPparam);
 
 	/************************************************************************************
-	**** Entrées : unsigned int uiLigne								                 ****
+	**** Entrées : unsigned int uiColonne, unsigned int uiColonne		             ****
 	**** Nécessite :															     ****
 	**** Sorties :																	 ****
-	**** Entraîne : Modification de l'attribut MATNbLigne de la matrice actuelle	 ****
+	**** Entraîne : Modification des dimensions de la matrice actuelle				 ****
 	*************************************************************************************/
-	void MATModifierNombreLignes(const unsigned int uiLigne);
+	void MATModifierDimensions(const unsigned int uiLigne, const unsigned int uiColonne);
 
-	/************************************************************************************
-	**** Entrées : unsigned int uiColonne								             ****
-	**** Nécessite :															     ****
-	**** Sorties :																	 ****
-	**** Entraîne : Modification de l'attribut MATNbColonnes de la matrice actuelle	 ****
-	*************************************************************************************/
-	void MATModifierNombreColonnes(const unsigned int uiColonne);
-	
+
 	//Surcharges d'opérateurs
 
 	/****************************************************************************************************************************
@@ -318,20 +311,23 @@ void CMatrices<MType>::MATModifierCase(const unsigned int uiLigne, const unsigne
 }
 
 /************************************************************************************
-**** Entrées : unsigned int uiLigne								                 ****
+**** Entrées : unsigned int uiColonne, unsigned int uiColonne		             ****
 **** Nécessite :															     ****
 **** Sorties :																	 ****
-**** Entraîne : Modification de l'attribut MATNbLigne de la matrice actuelle	 ****
+**** Entraîne : Modification des dimensions de la matrice actuelle				 ****
 *************************************************************************************/
 template<class MType>
-void CMatrices<MType>::MATModifierNombreLignes(const unsigned int uiLigne)
+void CMatrices<MType>::MATModifierDimensions(const unsigned int uiLigne, const unsigned int uiColonne)
 {
-	if (uiLigne < 0) {
+	if (uiColonne < 0) {
+		throw CException(EXCMATDimColonneNeg);
+	}
+	if (uiColonne < 0) {
 		throw CException(EXCMATDimLigneNeg);
 	}
 
 	//Si fonction appelée inutilement
-	if (uiLigne == MATLireNbLignes()) {
+	if (uiLigne == MATLireNbLignes() && uiColonne == MATLireNbColonnes()) {
 		return;
 	}
 
@@ -340,101 +336,19 @@ void CMatrices<MType>::MATModifierNombreLignes(const unsigned int uiLigne)
 	//Initialisation du nouveau tableau de contenu de la matrice aux bonnes dimensions
 	MType** pMTPtmp = new MType * [uiLigne];
 	for (uiBoucle1 = 0; uiBoucle1 < uiLigne; uiBoucle1++) {
-		pMTPtmp[uiBoucle1] = new MType[MATLireNbColonnes()];
-	}
-	
-	//Si il est recherché une réduction du nombre de lignes de la matrice
-	if (uiLigne < MATLireNbLignes()) {
-		//On décide une perte de valeurs (on tronque la matrice)
-		for (uiBoucle1 = 0; uiBoucle1 < uiLigne; uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
-				pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
-			}
-		}
-	}
-	//Au contraire, si il est recherché une augmentation du nombre de lignes
-	else {
-		//La valeur des cases ajoutées sera initialisée à la valeur par défaut du type de données
-
-
-		for (uiBoucle1 = 0; uiBoucle1 < uiLigne; uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
-				//Copie des données existantes
-				if (uiBoucle1 < MATLireNbLignes()) {
-					pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
-				}
-				//Ou on initialise les nouvelles cases vides
-				else {
-					pMTPtmp[uiBoucle1][uiBoucle2] = MType();
-				}
-			}
-		}
-	}
-	//On traite le changement de tableau de contenu:
-
-	//On désalloue l'ancien contenu
-	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
-		delete[] pMTPMATContenu[uiBoucle1];
-	}
-	delete[] pMTPMATContenu;
-
-	//On ajoute le nouveau contenu
-	pMTPMATContenu = pMTPtmp;
-
-	//On change le nombre de lignes stocké
-	uiMATNbLignes = uiLigne;
-}
-
-/************************************************************************************
-**** Entrées : unsigned int uiColonne								             ****
-**** Nécessite :															     ****
-**** Sorties :																	 ****
-**** Entraîne : Modification de l'attribut MATNbColonnes de la matrice actuelle	 ****
-*************************************************************************************/
-template<class MType>
-void CMatrices<MType>::MATModifierNombreColonnes(const unsigned int uiColonne)
-{
-	if (uiColonne < 0) {
-		throw CException(EXCMATDimColonneNeg);
-	}
-
-	//Si fonction appelée inutilement
-	if (uiColonne == MATLireNbColonnes()) {
-		return;
-	}
-
-	unsigned int uiBoucle1, uiBoucle2;
-
-	//Initialisation du nouveau tableau de contenu de la matrice aux bonnes dimensions
-	MType** pMTPtmp = new MType * [MATLireNbLignes()];
-	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
 		pMTPtmp[uiBoucle1] = new MType[uiColonne];
 	}
 
-	//Si il est recherché une réduction du nombre de colonnes de la matrice
-	if (uiColonne < MATLireNbColonnes()) {
-		//On décide une perte de valeurs (on tronque la matrice)
-		for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < uiColonne; uiBoucle2++) {
+	//Si les dimensions sont inférieures ou égales aux précédentes dimensions, on copie les anciennes valeurs et on tronque
+	//les valeurs éxcédentaires. Si on agrandit la matrice, on remplit les nouvelles cases avec la valeuir par défaut
+	//du type d'élément.
+	for(uiBoucle1 = 0; uiBoucle1 < uiLigne; uiBoucle1++) {
+		for (uiBoucle2 = 0; uiBoucle2 < uiColonne; uiBoucle2++) {
+			if (uiBoucle1 < MATLireNbLignes() && uiBoucle2 < MATLireNbColonnes()) {
 				pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
 			}
-		}
-	}
-	//Au contraire, si il est recherché une augmentation du nombre de colonnes
-	else {
-		//La valeur des cases ajoutées sera initialisée à la valeur par défaut du type de données
-
-		//Copie des données existantes
-		for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
-			for (uiBoucle2 = 0; uiBoucle2 < uiColonne; uiBoucle2++) {
-				//Copie des données existantes
-				if (uiBoucle2 < MATLireNbColonnes()) {
-					pMTPtmp[uiBoucle1][uiBoucle2] = MATLireElement(uiBoucle1, uiBoucle2);
-				}
-				//Ou on initialise les nouvelles cases vides
-				else {
-					pMTPtmp[uiBoucle1][uiBoucle2] = MType();
-				}
+			else {
+				pMTPtmp[uiBoucle1][uiBoucle2] = MType();
 			}
 		}
 	}
@@ -450,7 +364,8 @@ void CMatrices<MType>::MATModifierNombreColonnes(const unsigned int uiColonne)
 	//On ajoute le nouveau contenu
 	pMTPMATContenu = pMTPtmp;
 
-	//On change le nombre de colonnes stocké
+	//On change le nombre de colonnes et de lignes stocké
+	uiMATNbLignes = uiLigne;
 	uiMATNbColonnes = uiColonne;
 
 }
@@ -638,13 +553,10 @@ CMatrices<MType> & CMatrices<MType>::operator=(const CMatrices<MType> MATegal)
 {
 	unsigned int uiBoucle1, uiBoucle2;
 
-	if (MATLireNbLignes() != MATegal.MATLireNbLignes()) {
-		MATModifierNombreLignes(MATegal.MATLireNbLignes());
+	if (MATLireNbLignes() != MATegal.MATLireNbLignes() || MATLireNbColonnes() != MATegal.MATLireNbColonnes()) {
+		MATModifierDimensions(MATegal.MATLireNbLignes(), MATegal.MATLireNbColonnes());
 	}
-	if (MATLireNbColonnes() != MATegal.MATLireNbColonnes()) {
-		MATModifierNombreColonnes(MATegal.MATLireNbColonnes());
-	}
-
+	
 	for (uiBoucle1 = 0; uiBoucle1 < MATLireNbLignes(); uiBoucle1++) {
 		for (uiBoucle2 = 0; uiBoucle2 < MATLireNbColonnes(); uiBoucle2++) {
 			MATModifierCase(uiBoucle1, uiBoucle2, MATegal.MATLireElement(uiBoucle1, uiBoucle2));

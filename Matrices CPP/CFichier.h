@@ -36,6 +36,14 @@ public:
 	******************************************************************************************************/
 	static CMatrices<double> FICLireFichier(const char* pcChemin);
 
+	/***********************************************************************************************************************
+	**** Entrées : char* pcChaine, ifstream& fichier																    ****
+	**** Nécessite : Un fichier ouvert et une chaine non nulle								  							****
+	**** Sorties :																										****
+	**** Entraîne : Renvoie la chaine pcChaine passée en paramètre et dont tous les tabh et espaces sont supprimés	    ****
+	***********************************************************************************************************************/
+	static void FICLigneSuivante(char* pcLigne, ifstream& fichier);
+
 	//Fonctions de handle mauvaise mise en forme
 
 	/***********************************************************************************************************************

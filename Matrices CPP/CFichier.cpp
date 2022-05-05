@@ -25,14 +25,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 
 		//On récupère le type de données
 
-		//Cette boucle va etre utile pour ne pas tenir compte des lignes nulles ainsi que
-		//supprimer espaces et tabulations inutiles
-		do
-		{
-			fichier.getline(pcLigne, STR_LENGTH);
-			FICSupp_char(pcLigne, ' ');
-			FICSupp_char(pcLigne, '\t');
-		} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+		FICLigneSuivante(pcLigne, fichier);
 
 		char *pcToken = strtok(pcLigne, "=");
 		pcToken = strtok(NULL, "=");
@@ -46,12 +39,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 		if (strcmp(FICMinuscule(pcToken), "double") == 0) {
 
 			//On récupère le nombre de lignes
-			do
-			{
-				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_char(pcLigne, ' ');
-				FICSupp_char(pcLigne, '\t');
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+			FICLigneSuivante(pcLigne, fichier);
 
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
@@ -69,12 +57,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			uiparsedLignes = (unsigned int)(atoi(pcToken));
 
 			//On récupère le nombre de colonnes
-			do
-			{
-				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_char(pcLigne, ' ');
-				FICSupp_char(pcLigne, '\t');
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+			FICLigneSuivante(pcLigne, fichier);
 
 			pcToken = strtok(pcLigne, "=");
 			pcToken = strtok(NULL, "=");
@@ -96,12 +79,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 			CMatrices<double> MATretour(uiparsedLignes, uiparsedColonnes);
 
 			//On saute la ligne Matrice=[
-			do
-			{
-				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_char(pcLigne, ' ');
-				FICSupp_char(pcLigne, '\t');
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+			FICLigneSuivante(pcLigne, fichier);
 
 			//Et on commence à récupérer les valeurs
 			
@@ -147,12 +125,7 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 
 			}
 
-			do
-			{
-				fichier.getline(pcLigne, STR_LENGTH);
-				FICSupp_char(pcLigne, ' ');
-				FICSupp_char(pcLigne, '\t');
-			} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+			FICLigneSuivante(pcLigne, fichier);
 
 			if (pcLigne[0] != ']') {
 				delete[] pcLigne;
@@ -177,6 +150,22 @@ CMatrices<double> Cfichier::FICLireFichier(const char* pcChemin)
 
 	return MATretour;
 }
+
+/***********************************************************************************************************************
+**** Entrées : char* pcChaine, ifstream& fichier																    ****
+**** Nécessite : Un fichier ouvert et une chaine non nulle								  							****
+**** Sorties :																										****
+**** Entraîne : Renvoie la chaine pcChaine passée en paramètre et dont tous les tabh et espaces sont supprimés	    ****
+***********************************************************************************************************************/
+void Cfichier::FICLigneSuivante(char* pcLigne, ifstream& fichier) {
+	do
+	{
+		fichier.getline(pcLigne, STR_LENGTH);
+		FICSupp_char(pcLigne, ' ');
+		FICSupp_char(pcLigne, '\t');
+	} while (pcLigne[0] == '\n' || pcLigne[0] == '\0' || pcLigne[0] == '\r');
+}
+
 
 /***********************************************************************************************************************
 **** Entrées : char* pcChaine																					    ****
