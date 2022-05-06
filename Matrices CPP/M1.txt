@@ -1,11 +1,11 @@
 TypeMatrice=doUBLe
-NombreLignes=4
+NombreLignes=3
 NombreColonnes=3
 Matrice=[
 	1 2 3 
 	4 5 6
 	7 8 9
-	15 25 36
+]
 
 
 
